@@ -2,6 +2,24 @@
 
 A brutalist-style personal portfolio website for jasperan, AI Engineer and Developer Advocate.
 
+## Versions
+
+### 📄 **index.html** (Original)
+- Clean, minimal brutalist design
+- Fast loading with instant transitions
+- Perfect for maximum accessibility
+- Recommended for production use
+
+### ✨ **index-enhanced.html** (Enhanced)
+- Advanced animations and micro-interactions
+- JetBrains Mono & Space Mono typography
+- Custom cursor and visual effects
+- Scroll-triggered animations
+- Glitch effects and scanline overlay
+- For those who want extra visual flair
+
+**To use the enhanced version:** Rename `index-enhanced.html` to `index.html` or update your GitHub Pages settings.
+
 ## Design
 
 This portfolio uses a **brutalist web design** aesthetic featuring:
@@ -11,6 +29,17 @@ This portfolio uses a **brutalist web design** aesthetic featuring:
 - Visible grid borders
 - Asymmetric layouts
 - No rounded corners or subtle shadows
+
+### Enhanced Version Additional Features:
+- Animated grid background with noise texture
+- Custom crosshair cursor
+- Scanline effect overlay
+- Scroll-triggered staggered animations
+- Glitch text effects on hover
+- Enhanced project card interactions with rotation
+- Gradient timeline markers
+- Floating geometric elements
+- Pulsing border animations
 
 ## Tech Stack
 
