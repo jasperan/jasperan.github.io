@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jasperan | AI Engineer & Developer</title>
+    <meta name="description" content="AI Engineer specializing in emerging AI technologies, agents, and open-source development. 7+ years of experience in ML, gaming AI, and developer advocacy.">
+    
+    <!-- Favicon - Brutalist [J] -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230A0A0A' width='100' height='100'/><text x='50' y='68' font-family='monospace' font-size='60' fill='%23FF0000' text-anchor='middle' font-weight='bold'>[J]</text></svg>">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brutal-black': '#0A0A0A',
+                        'brutal-white': '#FAFAFA',
+                        'brutal-red': '#FF0000',
+                        'brutal-yellow': '#FFFF00',
+                        'brutal-cyan': '#00FFFF',
+                        'brutal-gray': '#A0A0A0',
+                    },
+                    fontFamily: {
+                        'mono': ['Courier New', 'Consolas', 'monospace'],
+                    },
+                    borderWidth: {
+                        '3': '3px',
+                        '4': '4px',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+        
+        .brutal-border {
+            border: 3px solid white;
+        }
+        
+        .brutal-hover:hover {
+            background-color: #FF0000;
+            color: white;
+            transition: background-color 0s, color 0s;
+        }
+        
+        .category-btn.active {
+            background-color: #FF0000;
+            color: white;
+        }
+        
+        .project-card {
+            transition: transform 0s, background-color 0s;
+        }
+        
+        .project-card:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 4px 4px 0 white;
+        }
+        
+        .timeline-marker {
+            width: 20px;
+            height: 20px;
+            background: #FF0000;
+            border: 3px solid white;
+        }
+        
+        .mono-text {
+            font-family: 'Courier New', Consolas, monospace;
+            letter-spacing: 0.05em;
+        }
+    </style>
+</head>
+<body class="bg-brutal-black text-brutal-white font-sans">
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 bg-brutal-black brutal-border border-t-0 border-l-0 border-r-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="#hero" class="mono-text text-2xl font-bold tracking-wider">[JASPERAN]</a>
+                <div class="hidden md:flex space-x-8 mono-text text-sm">
+                    <a href="#about" class="brutal-hover px-3 py-2 border-3 border-transparent hover:border-white">ABOUT</a>
+                    <a href="#projects" class="brutal-hover px-3 py-2 border-3 border-transparent hover:border-white">PROJECTS</a>
+                    <a href="#speaking" class="brutal-hover px-3 py-2 border-3 border-transparent hover:border-white">SPEAKING</a>
+                    <a href="#media" class="brutal-hover px-3 py-2 border-3 border-transparent hover:border-white">MEDIA</a>
+                    <a href="#contact" class="brutal-hover px-3 py-2 border-3 border-transparent hover:border-white">CONTACT</a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden brutal-border px-4 py-2 mono-text">MENU</button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-brutal-black brutal-border border-t-0 border-l-0 border-r-0">
+            <div class="px-4 py-6 space-y-4 mono-text">
+                <a href="#about" class="block brutal-hover px-3 py-2 border-3 border-transparent hover:border-white">ABOUT</a>
+                <a href="#projects" class="block brutal-hover px-3 py-2 border-3 border-transparent hover:border-white">PROJECTS</a>
+                <a href="#speaking" class="block brutal-hover px-3 py-2 border-3 border-transparent hover:border-white">SPEAKING</a>
+                <a href="#media" class="block brutal-hover px-3 py-2 border-3 border-transparent hover:border-white">MEDIA</a>
+                <a href="#contact" class="block brutal-hover px-3 py-2 border-3 border-transparent hover:border-white">CONTACT</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
+        <div class="absolute top-32 right-8 w-64 h-64 bg-brutal-red opacity-20"></div>
+        <div class="absolute bottom-32 left-8 w-48 h-48 bg-brutal-cyan opacity-20"></div>
+        <div class="absolute top-1/2 right-1/4 w-1 h-96 bg-brutal-yellow"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 relative z-10">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h1 class="mono-text text-brutal-white mb-4" style="font-size: clamp(3rem, 10vw, 8rem); line-height: 0.9;">
+                        JASPER<br/>AN
+                    </h1>
+                    <div class="brutal-border bg-brutal-red px-6 py-4 inline-block mb-6">
+                        <p class="mono-text text-brutal-white text-xl font-bold tracking-wide">AI ENGINEER</p>
+                    </div>
+                    <p class="text-xl md:text-2xl text-brutal-gray max-w-lg leading-relaxed">
+                        Building the future with <span class="text-brutal-cyan mono-text">AI agents</span>, 
+                        <span class="text-brutal-yellow mono-text">open source</span>, and 
+                        <span class="text-brutal-red mono-text">emerging tech</span>.
+                    </p>
+                    <div class="mt-8 flex flex-wrap gap-4">
+                        <a href="#projects" class="brutal-border brutal-hover px-8 py-4 mono-text text-lg inline-block cursor-pointer">
+                            VIEW WORK →
+                        </a>
+                        <a href="#contact" class="brutal-border brutal-hover px-8 py-4 mono-text text-lg inline-block cursor-pointer bg-brutal-red">
+                            GET IN TOUCH
+                        </a>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="brutal-border p-8 bg-brutal-black">
+                        <div class="mono-text text-sm text-brutal-gray mb-4">// QUICK STATS</div>
+                        <div class="space-y-4 mono-text">
+                            <div class="brutal-border p-4">
+                                <div class="text-brutal-yellow text-4xl font-bold">7+</div>
+                                <div class="text-brutal-gray">Years Experience</div>
+                            </div>
+                            <div class="brutal-border p-4">
+                                <div class="text-brutal-cyan text-4xl font-bold">50+</div>
+                                <div class="text-brutal-gray">Open Source Projects</div>
+                            </div>
+                            <div class="brutal-border p-4">
+                                <div class="text-brutal-red text-4xl font-bold">10K+</div>
+                                <div class="text-brutal-gray">GitHub Stars</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4 brutal-border border-l-0 border-r-0">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="mono-text text-4xl md:text-6xl font-bold mb-12">
+                <span class="text-brutal-red">[</span>ABOUT<span class="text-brutal-red">]</span>
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="brutal-border p-8">
+                    <h3 class="mono-text text-2xl text-brutal-yellow mb-6">WHO I AM</h3>
+                    <p class="text-lg text-brutal-gray leading-relaxed mb-6">
+                        AI Engineer specializing in emerging AI technologies. I love teaching people about 
+                        <span class="text-brutal-white mono-text">agents</span>, 
+                        <span class="text-brutal-white mono-text">vibecoding</span>, 
+                        <span class="text-brutal-white mono-text">opensource</span>, 
+                        <span class="text-brutal-white mono-text">inferencing</span>, 
+                        <span class="text-brutal-white mono-text">agentic AI</span>, and 
+                        <span class="text-brutal-white mono-text">ML</span> in unique ways.
+                    </p>
+                    <p class="text-lg text-brutal-gray leading-relaxed">
+                        7 years of experience building AI systems, from gaming ML platforms to autonomous agents. 
+                        I also develop <span class="text-brutal-cyan mono-text">Open-Source Intelligence (OSINT)</span> tools.
+                    </p>
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="brutal-border p-6 bg-brutal-red">
+                        <h3 class="mono-text text-2xl text-brutal-white mb-4">CURRENT FOCUS</h3>
+                        <ul class="space-y-3 text-brutal-white mono-text">
+                            <li>→ AI Agents & Reasoning Systems</li>
+                            <li>→ Multi-Agent RAG Architectures</li>
+                            <li>→ Oracle AI & Cloud Infrastructure</li>
+                            <li>→ Developer Advocacy & Education</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="brutal-border p-6">
+                        <h3 class="mono-text text-2xl text-brutal-cyan mb-4">DOMAINS</h3>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="brutal-border px-4 py-2 mono-text text-sm">AI/ML</span>
+                            <span class="brutal-border px-4 py-2 mono-text text-sm">Gaming AI</span>
+                            <span class="brutal-border px-4 py-2 mono-text text-sm">Computer Vision</span>
+                            <span class="brutal-border px-4 py-2 mono-text text-sm">NLP</span>
+                            <span class="brutal-border px-4 py-2 mono-text text-sm">OSINT</span>
+                            <span class="brutal-border px-4 py-2 mono-text text-sm">Cloud</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 px-4">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="mono-text text-4xl md:text-6xl font-bold mb-12">
+                <span class="text-brutal-cyan">[</span>PROJECTS<span class="text-brutal-cyan">]</span>
+            </h2>
+            
+            <!-- Category Filters -->
+            <div class="flex flex-wrap gap-4 mb-12">
+                <button class="category-btn brutal-border px-6 py-3 mono-text cursor-pointer active" data-category="all">
+                    ALL
+                </button>
+                <button class="category-btn brutal-border px-6 py-3 mono-text cursor-pointer" data-category="ai">
+                    AI/ML
+                </button>
+                <button class="category-btn brutal-border px-6 py-3 mono-text cursor-pointer" data-category="gaming">
+                    GAMING
+                </button>
+                <button class="category-btn brutal-border px-6 py-3 mono-text cursor-pointer" data-category="osint">
+                    OSINT
+                </button>
+                <button class="category-btn brutal-border px-6 py-3 mono-text cursor-pointer" data-category="tools">
+                    TOOLS
+                </button>
+            </div>
+            
+            <!-- Projects Grid -->
+            <div id="projects-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- whatsapp-osint -->
+                <div class="project-card brutal-border p-6 cursor-pointer" data-category="osint">
+                    <div class="mono-text text-sm text-brutal-yellow mb-3">OSINT</div>
+                    <h3 class="mono-text text-2xl font-bold mb-3">whatsapp-osint</h3>
+                    <p class="text-brutal-gray mb-4">WhatsApp OSINT toolkit for forensic analysis and intelligence gathering.</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="text-xs mono-text text-brutal-cyan border border-brutal-cyan px-2 py-1">Python</span>
+                        <span class="text-xs mono-text text-brutal-cyan border border-brutal-cyan px-2 py-1">OSINT</span>
+                    </div>
+                    <a href="https://github.com/jasperan/whatsapp-osint" target="_blank" class="brutal-hover brutal-border px-4 py-2 mono-text text-sm inline-block">
+                        VIEW ON GITHUB →
+                    </a>
+                </div>
+
+                <!-- leagueoflegends-optimizer -->
+                <div class="project-card brutal-border p-6 cursor-pointer" data-category="gaming ai">
+                    <div class="mono-text text-sm text-brutal-red mb-3">GAMING + AI</div>
+                    <h3 class="mono-text text-2xl font-bold mb-3">leagueoflegends-optimizer</h3>
+                    <p class="text-brutal-gray mb-4">Complete ML pipeline for League of Legends: data extraction, model building, real-time predictions.</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="text-xs mono-text text-brutal-cyan border border-brutal-cyan px-2 py-1">Python</span>
+                        <span class="text-xs mono-text text-brutal-cyan border border-brutal-cyan px-2 py-1">TensorFlow</span>
+                        <span class="text-xs mono-text text-brutal-cyan border border-brutal-cyan px-2 py-1">OCI</span>
+                    </div>
+                    <a href="https://github.com/oracle-devrel/leagueoflegends-optimizer" target="_blank" class="brutal-hover brutal-border px-4 py-2 mono-text text-sm inline-block">
+                        VIEW ON GITHUB →
+                    </a>
+                </div>
+
+                <!-- oracle-ai-developer-hub -->
+                <div class="project-card brutal-border p-6 cursor-pointer" data-category="ai tools">
+                    <div class="mono-text text-sm text-brutal-cyan mb-3">AI + TOOLS</div>
+                    <h3 class="mono-text text-2xl font-bold mb-3">oracle-ai-developer-hub</h3>
+                    <p class="text-brutal-gray mb-4">Comprehensive AI developer hub with guides, workshops, and resources for Oracle AI.</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="text-xs mono-text text-brutal-cyan border border-brutal-cyan px-2 py-1">Python</span>
+                        <span class="text-xs mono-text text-brutal-cyan border border-brutal-cyan px-2 py-1">Oracle AI</span>
+                    </div>
+                    <a href="https://github.com/oracle-devrel/oracle-ai-developer-hub" target="_blank" class="brutal-hover brutal-border px-4 py-2 mono-text text-sm inline-block">
+                        VIEW ON GITHUB →
+                    </a>
+                </div>
+
+                <!-- ragcli -->
+                <div class="project-card brutal-border p-6 cursor-pointer" data-category="ai">
+                    <div class="mono-text text-sm text-brutal-yellow mb-3">AI</div>
+                    <h3 class="mono-text text-2xl font-bold mb-3">ragcli</h3>
+                    <p class="text-brutal-gray mb-4">Oracle RAG CLI tool for building retrieval-augmented generation systems.</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="text-xs mono-text text-brutal-cyan border border-brutal-cyan px-2 py-1">Python</span>
+                        <span class="text-xs mono-text text-brutal-cyan border border-brutal-cyan px-2 py-1">RAG</span>
+                        <span class="text-xs mono-text text-brutal-cyan border border-brutal-cyan px-2 py-1">Oracle</span>
+                    </div>
+                    <a href="https://github.com/jasperan/ragcli" target="_blank" class="brutal-hover brutal-border px-4 py-2 mono-text text-sm inline-block">
+                        VIEW ON GITHUB →
+                    </a>
+                </div>
+
+                <!-- agent-reasoning -->
+                <div class="project-card brutal-border p-6 cursor-pointer" data-category="ai">
+                    <div class="mono-text text-sm text-brutal-yellow mb-3">AI</div>
+                    <h3 class="mono-text text-2xl font-bold mb-3">agent-reasoning</h3>
+                    <p class="text-brutal-gray mb-4">LLM reasoning engine for building intelligent agents with advanced capabilities.</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="text-xs mono-text text-brutal-cyan border border-brutal-cyan px-2 py-1">Python</span>
+                        <span class="text-xs mono-text text-brutal-cyan border border-brutal-cyan px-2 py-1">LLM</span>
+                        <span class="text-xs mono-text text-brutal-cyan border border-brutal-cyan px-2 py-1">Agents</span>
+                    </div>
+                    <a href="https://github.com/jasperan/agent-reasoning" target="_blank" class="brutal-hover brutal-border px-4 py-2 mono-text text-sm inline-block">
+                        VIEW ON GITHUB →
+                    </a>
+                </div>
+
+                <!-- picooraclaw -->
+                <div class="project-card brutal-border p-6 cursor-pointer" data-category="ai tools">
+                    <div class="mono-text text-sm text-brutal-red mb-3">AI + TOOLS</div>
+                    <h3 class="mono-text text-2xl font-bold mb-3">picooraclaw</h3>
+                    <p class="text-brutal-gray mb-4">Oracle AI Agent for autonomous intelligent assistance.</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="text-xs mono-text text-brutal-cyan border border-brutal-cyan px-2 py-1">Python</span>
+                        <span class="text-xs mono-text text-brutal-cyan border border-brutal-cyan px-2 py-1">Agents</span>
+                    </div>
+                    <a href="https://github.com/jasperan/picooraclaw" target="_blank" class="brutal-hover brutal-border px-4 py-2 mono-text text-sm inline-block">
+                        VIEW ON GITHUB →
+                    </a>
+                </div>
+
+                <!-- draw-realtime -->
+                <div class="project-card brutal-border p-6 cursor-pointer" data-category="ai">
+                    <div class="mono-text text-sm text-brutal-yellow mb-3">AI</div>
+                    <h3 class="mono-text text-2xl font-bold mb-3">draw-realtime</h3>
+                    <p class="text-brutal-gray mb-4">Real-time AI art generation and drawing application.</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="text-xs mono-text text-brutal-cyan border border-brutal-cyan px-2 py-1">Python</span>
+                        <span class="text-xs mono-text text-brutal-cyan border border-brutal-cyan px-2 py-1">AI Art</span>
+                    </div>
+                    <a href="https://github.com/jasperan/draw-realtime" target="_blank" class="brutal-hover brutal-border px-4 py-2 mono-text text-sm inline-block">
+                        VIEW ON GITHUB →
+                    </a>
+                </div>
+
+                <!-- tokenwatch -->
+                <div class="project-card brutal-border p-6 cursor-pointer" data-category="tools">
+                    <div class="mono-text text-sm text-brutal-cyan mb-3">TOOLS</div>
+                    <h3 class="mono-text text-2xl font-bold mb-3">tokenwatch</h3>
+                    <p class="text-brutal-gray mb-4">LLM usage monitor for tracking token consumption and costs.</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="text-xs mono-text text-brutal-cyan border border-brutal-cyan px-2 py-1">Python</span>
+                        <span class="text-xs mono-text text-brutal-cyan border border-brutal-cyan px-2 py-1">LLM</span>
+                    </div>
+                    <a href="https://github.com/jasperan/tokenwatch" target="_blank" class="brutal-hover brutal-border px-4 py-2 mono-text text-sm inline-block">
+                        VIEW ON GITHUB →
+                    </a>
+                </div>
+
+                <!-- OraclePageIndex -->
+                <div class="project-card brutal-border p-6 cursor-pointer" data-category="ai tools">
+                    <div class="mono-text text-sm text-brutal-red mb-3">AI + TOOLS</div>
+                    <h3 class="mono-text text-2xl font-bold mb-3">OraclePageIndex</h3>
+                    <p class="text-brutal-gray mb-4">Document intelligence system for processing and indexing documents.</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="text-xs mono-text text-brutal-cyan border border-brutal-cyan px-2 py-1">Python</span>
+                        <span class="text-xs mono-text text-brutal-cyan border border-brutal-cyan px-2 py-1">Oracle</span>
+                        <span class="text-xs mono-text text-brutal-cyan border border-brutal-cyan px-2 py-1">RAG</span>
+                    </div>
+                    <a href="https://github.com/jasperan/OraclePageIndex" target="_blank" class="brutal-hover brutal-border px-4 py-2 mono-text text-sm inline-block">
+                        VIEW ON GITHUB →
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Speaking Section -->
+    <section id="speaking" class="py-20 px-4 brutal-border border-l-0 border-r-0">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="mono-text text-4xl md:text-6xl font-bold mb-12">
+                <span class="text-brutal-yellow">[</span>SPEAKING<span class="text-brutal-yellow">]</span>
+            </h2>
+            
+            <div class="relative">
+                <!-- Timeline Line -->
+                <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-1 bg-brutal-white"></div>
+                
+                <!-- Timeline Items -->
+                <div class="space-y-12">
+                    
+                    <!-- 2026 -->
+                    <div class="relative flex items-center md:justify-center">
+                        <div class="timeline-marker absolute left-0 md:left-1/2 transform md:-translate-x-1/2 z-10"></div>
+                        <div class="ml-16 md:ml-0 md:w-5/12 md:mr-auto md:pr-8">
+                            <div class="brutal-border p-6 bg-brutal-red">
+                                <div class="mono-text text-sm mb-2">FEB 2026</div>
+                                <h3 class="mono-text text-xl font-bold mb-2">DevWeek San Jose, CA</h3>
+                                <p class="text-brutal-white">Building the Brain and Backbone of Enterprise Agents</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative flex items-center md:justify-center">
+                        <div class="timeline-marker absolute left-0 md:left-1/2 transform md:-translate-x-1/2 z-10"></div>
+                        <div class="ml-16 md:ml-0 md:w-5/12 md:ml-auto md:pl-8">
+                            <div class="brutal-border p-6">
+                                <div class="mono-text text-sm text-brutal-cyan mb-2">FEB 2026</div>
+                                <h3 class="mono-text text-xl font-bold mb-2">AICamp San Francisco, CA</h3>
+                                <p class="text-brutal-gray">Memory Engineering</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2025 -->
+                    <div class="relative flex items-center md:justify-center">
+                        <div class="timeline-marker absolute left-0 md:left-1/2 transform md:-translate-x-1/2 z-10"></div>
+                        <div class="ml-16 md:ml-0 md:w-5/12 md:mr-auto md:pr-8">
+                            <div class="brutal-border p-6">
+                                <div class="mono-text text-sm text-brutal-yellow mb-2">NOV 2025</div>
+                                <h3 class="mono-text text-xl font-bold mb-2">Kubecon Atlanta, GA</h3>
+                                <p class="text-brutal-gray">Agent2Agent Protocol Integration in Multi-Agent RAG System</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative flex items-center md:justify-center">
+                        <div class="timeline-marker absolute left-0 md:left-1/2 transform md:-translate-x-1/2 z-10"></div>
+                        <div class="ml-16 md:ml-0 md:w-5/12 md:ml-auto md:pl-8">
+                            <div class="brutal-border p-6">
+                                <div class="mono-text text-sm text-brutal-cyan mb-2">MAY 2025</div>
+                                <h3 class="mono-text text-xl font-bold mb-2">DevLive Tour Berlin</h3>
+                                <p class="text-brutal-gray">AI Developer Conference</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative flex items-center md:justify-center">
+                        <div class="timeline-marker absolute left-0 md:left-1/2 transform md:-translate-x-1/2 z-10"></div>
+                        <div class="ml-16 md:ml-0 md:w-5/12 md:mr-auto md:pr-8">
+                            <div class="brutal-border p-6">
+                                <div class="mono-text text-sm text-brutal-yellow mb-2">MAR 2025</div>
+                                <h3 class="mono-text text-xl font-bold mb-2">Oracle CloudWorld Tour Madrid</h3>
+                                <p class="text-brutal-gray">Cloud & AI Conference</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2024 -->
+                    <div class="relative flex items-center md:justify-center">
+                        <div class="timeline-marker absolute left-0 md:left-1/2 transform md:-translate-x-1/2 z-10"></div>
+                        <div class="ml-16 md:ml-0 md:w-5/12 md:ml-auto md:pl-8">
+                            <div class="brutal-border p-6 bg-brutal-cyan bg-opacity-20">
+                                <div class="mono-text text-sm text-brutal-cyan mb-2">NOV 2024</div>
+                                <h3 class="mono-text text-xl font-bold mb-2">Kubecon Salt Lake City, UT</h3>
+                                <p class="text-brutal-gray">Cloud Native Conference</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative flex items-center md:justify-center">
+                        <div class="timeline-marker absolute left-0 md:left-1/2 transform md:-translate-x-1/2 z-10"></div>
+                        <div class="ml-16 md:ml-0 md:w-5/12 md:mr-auto md:pr-8">
+                            <div class="brutal-border p-6">
+                                <div class="mono-text text-sm text-brutal-yellow mb-2">MAR 2024</div>
+                                <h3 class="mono-text text-xl font-bold mb-2">Kubecon Paris</h3>
+                                <p class="text-brutal-gray">Cloud Native Conference</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative flex items-center md:justify-center">
+                        <div class="timeline-marker absolute left-0 md:left-1/2 transform md:-translate-x-1/2 z-10"></div>
+                        <div class="ml-16 md:ml-0 md:w-5/12 md:ml-auto md:pl-8">
+                            <div class="brutal-border p-6">
+                                <div class="mono-text text-sm text-brutal-cyan mb-2">MAR 2024</div>
+                                <h3 class="mono-text text-xl font-bold mb-2">DevLive Tour London</h3>
+                                <p class="text-brutal-gray">Developer Conference</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2022-2023 -->
+                    <div class="relative flex items-center md:justify-center">
+                        <div class="timeline-marker absolute left-0 md:left-1/2 transform md:-translate-x-1/2 z-10"></div>
+                        <div class="ml-16 md:ml-0 md:w-5/12 md:mr-auto md:pr-8">
+                            <div class="brutal-border p-6 bg-brutal-yellow bg-opacity-20">
+                                <div class="mono-text text-sm text-brutal-yellow mb-2">2022-2024</div>
+                                <h3 class="mono-text text-xl font-bold mb-2">Oracle CloudWorld Las Vegas, NV</h3>
+                                <p class="text-brutal-gray">Annual Cloud Conference (3 consecutive years)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Media Section -->
+    <section id="media" class="py-20 px-4">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="mono-text text-4xl md:text-6xl font-bold mb-12">
+                <span class="text-brutal-red">[</span>MEDIA<span class="text-brutal-red">]</span>
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                
+                <!-- Featured Videos -->
+                <div>
+                    <h3 class="mono-text text-2xl text-brutal-yellow mb-6 brutal-border p-4">VIDEOS</h3>
+                    <div class="space-y-6">
+                        
+                        <div class="brutal-border p-6">
+                            <div class="mono-text text-sm text-brutal-cyan mb-2">NETWORKCHUCK</div>
+                            <h4 class="mono-text text-xl font-bold mb-3">You NEED to learn Machine Learning, RIGHT NOW!!</h4>
+                            <a href="https://www.youtube.com/watch?v=JJCq21Dc-Us" target="_blank" class="brutal-hover brutal-border px-4 py-2 mono-text text-sm inline-block">
+                                WATCH VIDEO →
+                            </a>
+                        </div>
+
+                        <div class="brutal-border p-6">
+                            <div class="mono-text text-sm text-brutal-cyan mb-2">LEAGUE OF LEGENDS SERIES</div>
+                            <h4 class="mono-text text-xl font-bold mb-3">ML with LoL Complete Workshop Series</h4>
+                            <div class="space-y-2 text-brutal-gray text-sm">
+                                <div>→ Data Extraction</div>
+                                <div>→ Model Building with scikit-learn & AutoGluon</div>
+                                <div>→ Introduction to Neural Networks</div>
+                            </div>
+                            <a href="https://github.com/oracle-devrel/leagueoflegends-optimizer" target="_blank" class="brutal-hover brutal-border px-4 py-2 mono-text text-sm inline-block mt-4">
+                                VIEW SERIES →
+                            </a>
+                        </div>
+
+                        <div class="brutal-border p-6">
+                            <div class="mono-text text-sm text-brutal-cyan mb-2">TRAINING LLMS</div>
+                            <h4 class="mono-text text-xl font-bold mb-3">Training Large Language Models in Oracle Cloud</h4>
+                            <a href="https://youtu.be/Zj4GGbrEekQ" target="_blank" class="brutal-hover brutal-border px-4 py-2 mono-text text-sm inline-block">
+                                WATCH VIDEO →
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Featured Articles -->
+                <div>
+                    <h3 class="mono-text text-2xl text-brutal-cyan mb-6 brutal-border p-4">ARTICLES</h3>
+                    <div class="space-y-6">
+                        
+                        <div class="brutal-border p-6">
+                            <div class="mono-text text-sm text-brutal-yellow mb-2">AI & AGENTS</div>
+                            <h4 class="mono-text text-xl font-bold mb-3">The Great AI Context Debate: Filesystem vs Database</h4>
+                            <a href="https://medium.com/oracledevs/the-great-ai-context-debate-why-filesystem-vs-database-is-the-wrong-question-3454e27c27f6" target="_blank" class="brutal-hover brutal-border px-4 py-2 mono-text text-sm inline-block">
+                                READ ARTICLE →
+                            </a>
+                        </div>
+
+                        <div class="brutal-border p-6">
+                            <div class="mono-text text-sm text-brutal-yellow mb-2">MULTI-AGENT RAG</div>
+                            <h4 class="mono-text text-xl font-bold mb-3">Build a Scalable Multi-Agent RAG System with A2A Protocol</h4>
+                            <a href="https://medium.com/oracledevs/build-a-scalable-multi-agent-rag-system-with-a2a-protocol-and-langchain-0ac0255976f1" target="_blank" class="brutal-hover brutal-border px-4 py-2 mono-text text-sm inline-block">
+                                READ ARTICLE →
+                            </a>
+                        </div>
+
+                        <div class="brutal-border p-6">
+                            <div class="mono-text text-sm text-brutal-yellow mb-2">GAMING ML SERIES</div>
+                            <h4 class="mono-text text-xl font-bold mb-3">League of Legends Optimizer Article Series</h4>
+                            <div class="space-y-2 text-brutal-gray text-sm">
+                                <div>→ Data Extraction & Processing</div>
+                                <div>→ Adversarial AI Models</div>
+                                <div>→ Real-Time Predictions</div>
+                            </div>
+                            <a href="https://github.com/oracle-devrel/leagueoflegends-optimizer/blob/main/articles/article1.md" target="_blank" class="brutal-hover brutal-border px-4 py-2 mono-text text-sm inline-block mt-4">
+                                READ SERIES →
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4 brutal-border border-l-0 border-r-0 border-t-0">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="mono-text text-4xl md:text-6xl font-bold mb-12">
+                <span class="text-brutal-cyan">[</span>CONTACT<span class="text-brutal-cyan">]</span>
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                
+                <div>
+                    <h3 class="mono-text text-2xl text-brutal-yellow mb-6">LET'S CONNECT</h3>
+                    <p class="text-lg text-brutal-gray mb-8">
+                        Interested in AI, ML, or collaboration? I'm always open to discussing new projects, 
+                        ideas, or opportunities to work together.
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <a href="https://github.com/jasperan" target="_blank" class="block brutal-border p-6 brutal-hover cursor-pointer">
+                            <div class="mono-text text-sm text-brutal-gray mb-2">GITHUB</div>
+                            <div class="mono-text text-xl font-bold">github.com/jasperan</div>
+                        </a>
+                        
+                        <a href="https://www.linkedin.com/in/jasperan/" target="_blank" class="block brutal-border p-6 brutal-hover cursor-pointer">
+                            <div class="mono-text text-sm text-brutal-gray mb-2">LINKEDIN</div>
+                            <div class="mono-text text-xl font-bold">linkedin.com/in/jasperan</div>
+                        </a>
+                        
+                        <a href="https://stackoverflow.com/users/9151930/jasper?tab=profile" target="_blank" class="block brutal-border p-6 brutal-hover cursor-pointer">
+                            <div class="mono-text text-sm text-brutal-gray mb-2">STACK OVERFLOW</div>
+                            <div class="mono-text text-xl font-bold">stackoverflow.com/users/9151930</div>
+                        </a>
+                        
+                        <a href="mailto:hello@jasperan.dev" class="block brutal-border p-6 brutal-hover cursor-pointer bg-brutal-cyan bg-opacity-10">
+                            <div class="mono-text text-sm text-brutal-cyan mb-2">EMAIL</div>
+                            <div class="mono-text text-xl font-bold">hello@jasperan.dev</div>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="brutal-border p-8 bg-brutal-red h-full flex flex-col justify-center">
+                        <h3 class="mono-text text-3xl font-bold mb-6">FOLLOW MY WORK</h3>
+                        <p class="text-lg mb-8">
+                            Everything I build goes open source. Follow me if you like Artificial Intelligence, 
+                            Gaming, and cool projects.
+                        </p>
+                        <div class="mono-text text-xl">
+                            <div class="mb-4">→ AI & Agents</div>
+                            <div class="mb-4">→ Gaming ML</div>
+                            <div class="mb-4">→ Open Source</div>
+                            <div>→ Developer Advocacy</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 px-4 bg-brutal-black">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mono-text text-sm text-brutal-gray mb-4 md:mb-0">
+                    © 2026 jasperan | Built with raw HTML & Tailwind
+                </div>
+                <div class="flex space-x-6 mono-text text-sm">
+                    <a href="https://github.com/jasperan" target="_blank" class="text-brutal-cyan hover:text-brutal-yellow">GitHub</a>
+                    <a href="https://www.linkedin.com/in/jasperan/" target="_blank" class="text-brutal-cyan hover:text-brutal-yellow">LinkedIn</a>
+                    <a href="https://stackoverflow.com/users/9151930/jasper?tab=profile" target="_blank" class="text-brutal-cyan hover:text-brutal-yellow">StackOverflow</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking a link
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Project category filter
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active button
+                categoryBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const category = btn.dataset.category;
+
+                // Filter projects
+                projectCards.forEach(card => {
+                    if (category === 'all' || card.dataset.category.includes(category)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Make project cards clickable
+        projectCards.forEach(card => {
+            card.addEventListener('click', (e) => {
+                // Don't trigger if clicking on the actual link button
+                if (e.target.tagName === 'A') return;
+                
+                const link = card.querySelector('a');
+                if (link) {
+                    window.open(link.href, '_blank');
+                }
+            });
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add keyboard navigation support
+        document.querySelectorAll('.brutal-hover, .category-btn, .project-card').forEach(el => {
+            el.setAttribute('tabindex', '0');
+            el.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    el.click();
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
