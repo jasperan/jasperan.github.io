@@ -124,6 +124,9 @@
         
         .animate-on-scroll {
             opacity: 0;
+        }
+        
+        .animate-on-scroll.visible {
             animation: slideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
         
@@ -364,7 +367,7 @@
     <div class="scanline"></div>
     
     <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 bg-slate-dark soft-border border-t-0 border-l-0 border-r-0 z-50 animate-on-scroll">
+    <nav class="fixed top-0 left-0 right-0 bg-slate-dark soft-border border-t-0 border-l-0 border-r-0 z-50">
         <div class="max-w-7xl mx-auto px-4 py-4">
             <div class="flex justify-between items-center">
                 <a href="#hero" class="mono-text text-2xl tracking-wider glitch-text" data-text="[JASPERAN]">[JASPERAN]</a>
@@ -1045,7 +1048,7 @@
                         block: 'start'
                     });
                 }
-            });
+            }, { passive: false });
         });
 
         // Scroll-triggered animations
@@ -1057,14 +1060,13 @@
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.animationPlayState = 'running';
+                    entry.target.classList.add('visible');
                     observer.unobserve(entry.target);
                 }
             });
         }, observerOptions);
 
         document.querySelectorAll('.animate-on-scroll').forEach(el => {
-            el.style.animationPlayState = 'paused';
             observer.observe(el);
         });
 
