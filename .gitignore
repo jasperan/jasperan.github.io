@@ -48,15 +48,34 @@ dogfood-output/
 .playwright-mcp/
 
 
-# OpenCode-generated documentation (local reference only)
+# OpenCode / Claude-generated documentation (local reference only)
+COLOR_UPDATE.md
+ENHANCEMENT_SUMMARY.md
+FRONTEND_DESIGN_IMPROVEMENTS.md
+INSTALLED_SKILLS.md
+MEDIA_PHOTOS_UPDATE.md
+OPENCODE_AUTO_EXECUTION.md
+SESSION_SUMMARY.md
 TESTING_REPORT.md
 AGENT_HARNESS_ANNEX.md
 SKILLS_EXECUTION_SUMMARY.md
+dogfood-report.md
 
 # Generated documentation
 docs/plans/
 docs/*.md
 !docs/README.md
+
+# Planning skill outputs
+task_plan.md
+findings.md
+progress.md
+
+# Catch-all for generated uppercase docs
+*_UPDATE.md
+*_SUMMARY.md
 *_FEATURES.md
 *_ENHANCEMENTS.md
 *_REPORT.md
+*_IMPROVEMENTS.md
+*_EXECUTION.md
