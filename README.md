@@ -143,3 +143,48 @@ Built with:
 - [Tailwind CSS](https://tailwindcss.com/)
 - Brutalist design principles
 - ❤️ and raw HTML
+
+---
+
+## 🎨 Frontend Design
+
+### UI Screenshots
+
+The portfolio features a **Brutalist Monospace** aesthetic with distinctive typography and bold visual elements.
+
+#### Hero Section
+![Hero](assets/screenshots/hero.png)
+*Landing area with animated grid background and noise texture*
+
+#### About Section
+![About](assets/screenshots/about.png)
+*Personal introduction with brutalist typography*
+
+#### Projects Gallery
+![Projects](assets/screenshots/projects.png)
+*Showcase of AI and development projects*
+
+#### Contact Section
+![Contact](assets/screenshots/contact.png)
+*Contact form with custom styling*
+
+### Design System
+
+| Component | Description |
+|-----------|-------------|
+| **Color Palette** | Soft violet (#8B5CF6), cyan (#06B6D4), slate dark backgrounds |
+| **Typography** | JetBrains Mono + Space Mono monospace fonts |
+| **Layout** | Asymmetric grids, bold borders, high contrast |
+| **Effects** | Custom crosshair cursor, glitch animations, noise overlay |
+| **Background** | Animated grid pattern with gradient mesh |
+
+### Key UI Components
+
+1. **Custom Cursor** - Crosshair SVG cursor replacing default pointer
+2. **Glitch Text** - Animated text effects on hover
+3. **Grid Background** - CSS-generated grid with subtle animation
+4. **Noise Texture** - SVG noise overlay for tactile feel
+5. **Project Cards** - Hover-reveal information with smooth transitions
+6. **Social Links** - Icon buttons with color-coded hover states
+
+> **Note**: Screenshots are stored in `assets/screenshots/`. Open index.html in a browser to capture updated screenshots.
