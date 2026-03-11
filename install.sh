@@ -3,10 +3,13 @@ set -euo pipefail
 
 # ============================================================
 # personal-portfolio — One-Command Installer
-# See README for details
+# personal-portfolio
 #
 # Usage:
 #   curl -fsSL https://raw.githubusercontent.com/jasperan/jasperan.github.io/main/install.sh | bash
+#
+# Override install location:
+#   PROJECT_DIR=/opt/myapp curl -fsSL ... | bash
 # ============================================================
 
 REPO_URL="https://github.com/jasperan/jasperan.github.io.git"
@@ -33,7 +36,7 @@ print_banner() {
     echo ""
     echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
     echo -e "${BOLD}  personal-portfolio${NC}"
-    echo -e "  See README for details"
+    echo -e "  personal-portfolio"
     echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
     echo ""
 }
