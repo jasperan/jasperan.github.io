@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jasperan — AI Engineer & Developer</title>
+    <meta name="description" content="AI Engineer specializing in emerging AI technologies, agents, and open-source development. 7+ years of experience in ML, gaming AI, and developer advocacy.">
+    <meta property="og:title" content="jasperan — AI Engineer & Developer">
+    <meta property="og:description" content="Building AI agents, open source tools, and emerging tech. 112 projects, 1.5K+ GitHub stars.">
+    <meta property="og:type" content="website">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230F766E' rx='16' width='100' height='100'/><text x='50' y='70' font-family='serif' font-size='64' fill='%23FAFAF9' text-anchor='middle' font-weight='700'>J</text></svg>">
+
+    <!-- Fonts: Instrument Serif (display) + Outfit (body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream:    '#FAFAF9',
+                        ink:      '#1C1917',
+                        muted:    '#78716C',
+                        faint:    '#A8A29E',
+                        border:   '#E7E5E4',
+                        surface:  '#F5F5F4',
+                        accent:   '#0F766E',
+                        'accent-light': '#CCFBF1',
+                        'accent-dark': '#134E4A',
+                    },
+                    fontFamily: {
+                        display: ['"Instrument Serif"', 'Georgia', 'serif'],
+                        body:    ['"Outfit"', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Outfit', system-ui, sans-serif;
+            background: #FAFAF9;
+            color: #1C1917;
+        }
+
+        /* Noise overlay — subtle warmth */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url('data:image/svg+xml,<svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="4"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.03"/></svg>');
+            pointer-events: none;
+            z-index: 50;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Stagger delays */
+        .d1 { transition-delay: 0.06s; }
+        .d2 { transition-delay: 0.12s; }
+        .d3 { transition-delay: 0.18s; }
+        .d4 { transition-delay: 0.24s; }
+        .d5 { transition-delay: 0.30s; }
+        .d6 { transition-delay: 0.36s; }
+
+        /* Link underline animation */
+        .link-underline {
+            position: relative;
+            text-decoration: none;
+        }
+        .link-underline::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #0F766E;
+            transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .link-underline:hover::after {
+            width: 100%;
+        }
+
+        /* Card hover */
+        .card-hover {
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                        box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px -8px rgba(28, 25, 23, 0.1);
+        }
+
+        /* Active nav indicator */
+        .nav-link.active {
+            color: #0F766E;
+        }
+        .nav-link.active::after {
+            width: 100% !important;
+        }
+
+        /* Category filter */
+        .cat-btn {
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .cat-btn.active {
+            background: #0F766E;
+            color: #FAFAF9;
+            border-color: #0F766E;
+        }
+
+        /* Project card transitions for filtering */
+        .project-item {
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        .project-item.hidden-card {
+            opacity: 0;
+            transform: scale(0.95);
+            pointer-events: none;
+            position: absolute;
+            width: 0;
+            height: 0;
+            overflow: hidden;
+        }
+
+        /* Focus ring */
+        a:focus-visible, button:focus-visible {
+            outline: 2px solid #0F766E;
+            outline-offset: 3px;
+            border-radius: 2px;
+        }
+
+        /* Skip link */
+        .skip-link {
+            position: absolute;
+            top: -100%;
+            left: 16px;
+            z-index: 100;
+            background: #0F766E;
+            color: #FAFAF9;
+            padding: 8px 16px;
+            border-radius: 0 0 6px 6px;
+            font-weight: 500;
+        }
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* Balanced text */
+        h1, h2, h3 { text-wrap: balance; }
+        p { text-wrap: pretty; }
+
+        /* Tabular numbers for stats */
+        .tabular { font-variant-numeric: tabular-nums; }
+    </style>
+</head>
+<body class="bg-cream text-ink font-body antialiased">
+
+    <!-- Skip to content -->
+    <a href="#main" class="skip-link font-body">Skip to content</a>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 bg-cream/90 backdrop-blur-md z-40 border-b border-border" role="navigation" aria-label="Main navigation">
+        <div class="max-w-6xl mx-auto px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="#hero" class="font-display text-2xl italic text-accent tracking-tight">jasperan</a>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#about" class="nav-link link-underline text-sm font-medium text-muted hover:text-ink">About</a>
+                    <a href="#course" class="nav-link link-underline text-sm font-medium text-muted hover:text-ink">Course</a>
+                    <a href="#projects" class="nav-link link-underline text-sm font-medium text-muted hover:text-ink">Projects</a>
+                    <a href="#speaking" class="nav-link link-underline text-sm font-medium text-muted hover:text-ink">Speaking</a>
+                    <a href="#media" class="nav-link link-underline text-sm font-medium text-muted hover:text-ink">Media</a>
+                    <a href="#contact" class="nav-link link-underline text-sm font-medium text-muted hover:text-ink">Contact</a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden p-2 text-muted hover:text-ink" aria-label="Toggle navigation menu" aria-expanded="false">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-cream border-t border-border">
+            <div class="px-6 py-6 space-y-4">
+                <a href="#about" class="block text-base font-medium text-muted hover:text-accent">About</a>
+                <a href="#course" class="block text-base font-medium text-muted hover:text-accent">Course</a>
+                <a href="#projects" class="block text-base font-medium text-muted hover:text-accent">Projects</a>
+                <a href="#speaking" class="block text-base font-medium text-muted hover:text-accent">Speaking</a>
+                <a href="#media" class="block text-base font-medium text-muted hover:text-accent">Media</a>
+                <a href="#contact" class="block text-base font-medium text-muted hover:text-accent">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <main id="main">
+
+    <!-- Hero Section -->
+    <section id="hero" class="min-h-[100dvh] flex items-center relative pt-16">
+        <div class="max-w-6xl mx-auto px-6 lg:px-8 py-24 md:py-32 w-full">
+            <div class="grid md:grid-cols-12 gap-8 md:gap-12 items-end">
+                <div class="md:col-span-8 reveal">
+                    <p class="text-accent font-medium text-sm tracking-wide uppercase mb-6">AI Engineer &amp; Developer Advocate</p>
+                    <h1 class="font-display text-ink leading-[0.92] tracking-tight mb-8" style="font-size: clamp(3.5rem, 9vw, 7.5rem);">
+                        Jasper<br>Nacho<br><em class="text-accent">Martinez</em>
+                    </h1>
+                    <p class="text-muted text-lg md:text-xl max-w-lg leading-relaxed mb-10">
+                        Building AI agents, open source tools, and emerging tech.
+                        7 years of shipping things that think for themselves.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#projects" class="inline-flex items-center gap-2 bg-accent text-cream px-7 py-3.5 rounded font-medium text-sm hover:bg-accent-dark transition-colors">
+                            View work
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </a>
+                        <a href="#contact" class="inline-flex items-center gap-2 border border-border text-ink px-7 py-3.5 rounded font-medium text-sm hover:border-accent hover:text-accent transition-colors">
+                            Get in touch
+                        </a>
+                    </div>
+                </div>
+                <div class="md:col-span-4 reveal d2">
+                    <div class="space-y-6 md:text-right">
+                        <div>
+                            <div class="tabular font-display text-5xl md:text-6xl text-ink">112</div>
+                            <div class="text-muted text-sm mt-1">Open source projects</div>
+                        </div>
+                        <div>
+                            <div class="tabular font-display text-5xl md:text-6xl text-ink">1.5K+</div>
+                            <div class="text-muted text-sm mt-1">GitHub stars</div>
+                        </div>
+                        <div>
+                            <div class="tabular font-display text-5xl md:text-6xl text-accent">7+</div>
+                            <div class="text-muted text-sm mt-1">Years building AI systems</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Decorative accent line -->
+        <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent"></div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 md:py-32 px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-12 gap-12 md:gap-16">
+                <div class="md:col-span-5 reveal">
+                    <p class="text-accent font-medium text-sm tracking-wide uppercase mb-4">About</p>
+                    <h2 class="font-display text-4xl md:text-5xl lg:text-6xl tracking-tight leading-[0.95]">
+                        AI systems that<br><em>actually work</em>
+                    </h2>
+                </div>
+                <div class="md:col-span-7 space-y-8 reveal d2">
+                    <p class="text-lg text-muted leading-relaxed">
+                        AI Engineer specializing in emerging AI technologies. I teach people about
+                        <strong class="text-ink font-medium">agents</strong>,
+                        <strong class="text-ink font-medium">vibecoding</strong>,
+                        <strong class="text-ink font-medium">open source</strong>,
+                        <strong class="text-ink font-medium">inferencing</strong>, and
+                        <strong class="text-ink font-medium">ML</strong> in ways that stick.
+                    </p>
+                    <p class="text-lg text-muted leading-relaxed">
+                        7 years of building AI systems, from gaming ML platforms to autonomous agents.
+                        I also develop <strong class="text-ink font-medium">Open-Source Intelligence (OSINT)</strong> tools.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-3 pt-4">
+                        <div class="bg-surface rounded-lg px-5 py-4 reveal d1">
+                            <div class="text-accent font-medium text-sm mb-1">Current focus</div>
+                            <div class="text-ink text-sm">AI Agents &amp; Reasoning</div>
+                        </div>
+                        <div class="bg-surface rounded-lg px-5 py-4 reveal d2">
+                            <div class="text-accent font-medium text-sm mb-1">Architecture</div>
+                            <div class="text-ink text-sm">Multi-Agent RAG</div>
+                        </div>
+                        <div class="bg-surface rounded-lg px-5 py-4 reveal d3">
+                            <div class="text-accent font-medium text-sm mb-1">Platform</div>
+                            <div class="text-ink text-sm">Oracle AI &amp; Cloud</div>
+                        </div>
+                        <div class="bg-surface rounded-lg px-5 py-4 reveal d4">
+                            <div class="text-accent font-medium text-sm mb-1">Mission</div>
+                            <div class="text-ink text-sm">Developer Education</div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-2 pt-2">
+                        <span class="text-xs font-medium text-muted bg-surface px-3 py-1.5 rounded-full">AI/ML</span>
+                        <span class="text-xs font-medium text-muted bg-surface px-3 py-1.5 rounded-full">Gaming AI</span>
+                        <span class="text-xs font-medium text-muted bg-surface px-3 py-1.5 rounded-full">Computer Vision</span>
+                        <span class="text-xs font-medium text-muted bg-surface px-3 py-1.5 rounded-full">NLP</span>
+                        <span class="text-xs font-medium text-muted bg-surface px-3 py-1.5 rounded-full">OSINT</span>
+                        <span class="text-xs font-medium text-muted bg-surface px-3 py-1.5 rounded-full">Cloud</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="max-w-6xl mx-auto px-6 lg:px-8"><div class="h-px bg-border"></div></div>
+
+    <!-- Course Section -->
+    <section id="course" class="py-24 md:py-32 px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto">
+            <p class="text-accent font-medium text-sm tracking-wide uppercase mb-4 reveal">Featured course</p>
+            <a href="https://www.deeplearning.ai/short-courses/agent-memory-building-memory-aware-agents/" target="_blank" rel="noopener noreferrer"
+               class="block bg-white border border-border rounded-2xl p-8 md:p-12 card-hover reveal d1 group">
+                <div class="flex flex-col md:flex-row md:items-start gap-8">
+                    <div class="flex-shrink-0">
+                        <div class="w-16 h-16 rounded-xl bg-accent/10 flex items-center justify-center">
+                            <svg class="w-8 h-8 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex flex-wrap items-center gap-3 mb-3">
+                            <span class="text-sm font-medium text-accent">DeepLearning.AI x Oracle</span>
+                            <span class="text-xs text-faint font-medium bg-surface px-2.5 py-1 rounded-full">2026</span>
+                        </div>
+                        <h3 class="font-display text-2xl md:text-3xl tracking-tight mb-4 group-hover:text-accent transition-colors">
+                            Agent Memory: Building Memory-Aware Agents
+                        </h3>
+                        <p class="text-muted leading-relaxed mb-6 max-w-2xl">
+                            Co-instructor with Richmond Alake. Build persistent memory systems for AI agents using Oracle AI Database, LangChain, and LLM-powered pipelines. 7 video lessons covering memory-first architecture, semantic tool retrieval, and autonomous write-back loops.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-xs font-medium text-accent bg-accent-light px-3 py-1 rounded-full">Memory Engineering</span>
+                            <span class="text-xs font-medium text-accent bg-accent-light px-3 py-1 rounded-full">Oracle AI Database</span>
+                            <span class="text-xs font-medium text-accent bg-accent-light px-3 py-1 rounded-full">LangChain</span>
+                            <span class="text-xs font-medium text-accent bg-accent-light px-3 py-1 rounded-full">Andrew Ng</span>
+                        </div>
+                    </div>
+                    <div class="flex-shrink-0 hidden md:flex items-start pt-2 text-faint group-hover:text-accent transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="max-w-6xl mx-auto px-6 lg:px-8"><div class="h-px bg-border"></div></div>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 md:py-32 px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+                <div class="reveal">
+                    <p class="text-accent font-medium text-sm tracking-wide uppercase mb-4">Projects</p>
+                    <h2 class="font-display text-4xl md:text-5xl lg:text-6xl tracking-tight leading-[0.95]">
+                        Open source,<br><em>always</em>
+                    </h2>
+                </div>
+                <!-- Category Filters -->
+                <div class="flex flex-wrap gap-2 reveal d2" role="group" aria-label="Filter projects by category">
+                    <button class="cat-btn text-xs font-medium px-4 py-2 rounded-full border border-border text-muted hover:text-ink active" data-category="all">All</button>
+                    <button class="cat-btn text-xs font-medium px-4 py-2 rounded-full border border-border text-muted hover:text-ink" data-category="ai">AI/ML</button>
+                    <button class="cat-btn text-xs font-medium px-4 py-2 rounded-full border border-border text-muted hover:text-ink" data-category="agents">Agents</button>
+                    <button class="cat-btn text-xs font-medium px-4 py-2 rounded-full border border-border text-muted hover:text-ink" data-category="oracle">Oracle</button>
+                    <button class="cat-btn text-xs font-medium px-4 py-2 rounded-full border border-border text-muted hover:text-ink" data-category="gaming">Gaming</button>
+                    <button class="cat-btn text-xs font-medium px-4 py-2 rounded-full border border-border text-muted hover:text-ink" data-category="osint">OSINT</button>
+                    <button class="cat-btn text-xs font-medium px-4 py-2 rounded-full border border-border text-muted hover:text-ink" data-category="tools">Tools</button>
+                </div>
+            </div>
+
+            <div id="projects-grid" class="grid md:grid-cols-2 gap-4">
+
+                <!-- whatsapp-osint -->
+                <a href="https://github.com/jasperan/whatsapp-osint" target="_blank"
+                   class="project-item card-hover bg-white border border-border rounded-xl p-6 group reveal d1" data-category="osint">
+                    <div class="flex items-start justify-between mb-3">
+                        <span class="text-xs font-medium text-accent bg-accent-light px-2.5 py-1 rounded-full">OSINT</span>
+                        <span class="text-sm tabular text-faint font-medium">1,147 stars</span>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2 group-hover:text-accent transition-colors">whatsapp-osint</h3>
+                    <p class="text-muted text-sm leading-relaxed mb-4">WhatsApp spy: logs online/offline events from anyone in the world.</p>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Python</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Selenium</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">OSINT</span>
+                    </div>
+                </a>
+
+                <!-- leagueoflegends-optimizer -->
+                <a href="https://github.com/oracle-devrel/leagueoflegends-optimizer" target="_blank"
+                   class="project-item card-hover bg-white border border-border rounded-xl p-6 group reveal d2" data-category="gaming ai">
+                    <div class="flex items-start justify-between mb-3">
+                        <span class="text-xs font-medium text-accent bg-accent-light px-2.5 py-1 rounded-full">Gaming + AI</span>
+                        <span class="text-sm tabular text-faint font-medium">147 stars</span>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2 group-hover:text-accent transition-colors">leagueoflegends-optimizer</h3>
+                    <p class="text-muted text-sm leading-relaxed mb-4">Complete ML pipeline for League of Legends: data extraction, model building, real-time predictions.</p>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Python</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">TensorFlow</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">OCI</span>
+                    </div>
+                </a>
+
+                <!-- oracle-ai-developer-hub -->
+                <a href="https://github.com/oracle-devrel/oracle-ai-developer-hub" target="_blank"
+                   class="project-item card-hover bg-white border border-border rounded-xl p-6 group reveal d3" data-category="ai oracle tools">
+                    <div class="flex items-start justify-between mb-3">
+                        <span class="text-xs font-medium text-accent bg-accent-light px-2.5 py-1 rounded-full">AI + Oracle</span>
+                        <span class="text-sm tabular text-faint font-medium">123 stars</span>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2 group-hover:text-accent transition-colors">oracle-ai-developer-hub</h3>
+                    <p class="text-muted text-sm leading-relaxed mb-4">Technical resources for AI developers to build applications, agents, and systems using Oracle AI Database and OCI services.</p>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Python</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Oracle AI</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Jupyter</span>
+                    </div>
+                </a>
+
+                <!-- picooraclaw -->
+                <a href="https://github.com/jasperan/picooraclaw" target="_blank"
+                   class="project-item card-hover bg-white border border-border rounded-xl p-6 group reveal d4" data-category="agents oracle">
+                    <div class="flex items-start justify-between mb-3">
+                        <span class="text-xs font-medium text-accent bg-accent-light px-2.5 py-1 rounded-full">Agents + Oracle</span>
+                        <span class="text-sm tabular text-faint font-medium">79 stars</span>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2 group-hover:text-accent transition-colors">picooraclaw</h3>
+                    <p class="text-muted text-sm leading-relaxed mb-4">PicoClaw that works with Oracle AI Database for autonomous intelligent assistance.</p>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Go</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Oracle</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Agents</span>
+                    </div>
+                </a>
+
+                <!-- ragcli -->
+                <a href="https://github.com/jasperan/ragcli" target="_blank"
+                   class="project-item card-hover bg-white border border-border rounded-xl p-6 group reveal d5" data-category="ai oracle">
+                    <div class="flex items-start justify-between mb-3">
+                        <span class="text-xs font-medium text-accent bg-accent-light px-2.5 py-1 rounded-full">AI + RAG</span>
+                        <span class="text-sm tabular text-faint font-medium">10 stars</span>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2 group-hover:text-accent transition-colors">ragcli</h3>
+                    <p class="text-muted text-sm leading-relaxed mb-4">RAG CLI for Oracle AI Database, super easy to set up with Rich terminal UI.</p>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Python</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">RAG</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Oracle</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Ollama</span>
+                    </div>
+                </a>
+
+                <!-- ai-congress -->
+                <a href="https://github.com/jasperan/ai-congress" target="_blank"
+                   class="project-item card-hover bg-white border border-border rounded-xl p-6 group reveal d6" data-category="ai agents">
+                    <div class="flex items-start justify-between mb-3">
+                        <span class="text-xs font-medium text-accent bg-accent-light px-2.5 py-1 rounded-full">AI + Agents</span>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2 group-hover:text-accent transition-colors">ai-congress</h3>
+                    <p class="text-muted text-sm leading-relaxed mb-4">Autonomous LLM agents collaborate and vote on responses using weighted ensemble decision-making algorithms.</p>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Python</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Ollama</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Ensemble</span>
+                    </div>
+                </a>
+
+                <!-- emotion-engine -->
+                <a href="https://github.com/jasperan/emotion-engine" target="_blank"
+                   class="project-item card-hover bg-white border border-border rounded-xl p-6 group reveal d1" data-category="ai agents">
+                    <div class="flex items-start justify-between mb-3">
+                        <span class="text-xs font-medium text-accent bg-accent-light px-2.5 py-1 rounded-full">AI + Emotion</span>
+                        <span class="text-sm tabular text-faint font-medium">3 stars</span>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2 group-hover:text-accent transition-colors">emotion-engine</h3>
+                    <p class="text-muted text-sm leading-relaxed mb-4">AI emotional engine for real-world agentic problem solving.</p>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Python</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Agents</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Emotion</span>
+                    </div>
+                </a>
+
+                <!-- orahermes-agent -->
+                <a href="https://github.com/jasperan/orahermes-agent" target="_blank"
+                   class="project-item card-hover bg-white border border-border rounded-xl p-6 group reveal d2" data-category="agents oracle">
+                    <div class="flex items-start justify-between mb-3">
+                        <span class="text-xs font-medium text-accent bg-accent-light px-2.5 py-1 rounded-full">Agents + Oracle</span>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2 group-hover:text-accent transition-colors">orahermes-agent</h3>
+                    <p class="text-muted text-sm leading-relaxed mb-4">Oracle AI Agent Harness: fork of NousResearch/hermes-agent powered by OCI GenAI and Oracle 26ai Free.</p>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Python</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Oracle</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">OCI</span>
+                    </div>
+                </a>
+
+                <!-- zerooraclaw -->
+                <a href="https://github.com/jasperan/zerooraclaw" target="_blank"
+                   class="project-item card-hover bg-white border border-border rounded-xl p-6 group reveal d3" data-category="agents oracle">
+                    <div class="flex items-start justify-between mb-3">
+                        <span class="text-xs font-medium text-accent bg-accent-light px-2.5 py-1 rounded-full">Agents + Oracle</span>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2 group-hover:text-accent transition-colors">zerooraclaw</h3>
+                    <p class="text-muted text-sm leading-relaxed mb-4">Fast, small, and fully autonomous AI assistant running exclusively on Oracle AI Database and Oracle Free Container.</p>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Rust</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Oracle</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Autonomous</span>
+                    </div>
+                </a>
+
+                <!-- ironoraclaw -->
+                <a href="https://github.com/jasperan/ironoraclaw" target="_blank"
+                   class="project-item card-hover bg-white border border-border rounded-xl p-6 group reveal d4" data-category="agents oracle">
+                    <div class="flex items-start justify-between mb-3">
+                        <span class="text-xs font-medium text-accent bg-accent-light px-2.5 py-1 rounded-full">Agents + Security</span>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2 group-hover:text-accent transition-colors">ironoraclaw</h3>
+                    <p class="text-muted text-sm leading-relaxed mb-4">Oracle AI Database-powered secure personal AI assistant: IronClaw fork with Oracle as the exclusive persistence layer.</p>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Rust</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Oracle</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Security</span>
+                    </div>
+                </a>
+
+                <!-- oraclaw -->
+                <a href="https://github.com/jasperan/oraclaw" target="_blank"
+                   class="project-item card-hover bg-white border border-border rounded-xl p-6 group reveal d5" data-category="agents oracle">
+                    <div class="flex items-start justify-between mb-3">
+                        <span class="text-xs font-medium text-accent bg-accent-light px-2.5 py-1 rounded-full">Agents + Oracle</span>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2 group-hover:text-accent transition-colors">oraclaw</h3>
+                    <p class="text-muted text-sm leading-relaxed mb-4">A fork of openclaw that works with Oracle AI Database for multi-agent AI assistance.</p>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">TypeScript</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Oracle</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Multi-Agent</span>
+                    </div>
+                </a>
+
+                <!-- tinyoraclaw -->
+                <a href="https://github.com/jasperan/tinyoraclaw" target="_blank"
+                   class="project-item card-hover bg-white border border-border rounded-xl p-6 group reveal d6" data-category="agents oracle">
+                    <div class="flex items-start justify-between mb-3">
+                        <span class="text-xs font-medium text-accent bg-accent-light px-2.5 py-1 rounded-full">Agents + Oracle</span>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2 group-hover:text-accent transition-colors">tinyoraclaw</h3>
+                    <p class="text-muted text-sm leading-relaxed mb-4">Multi-Agent AI Assistant + Oracle AI Database for persistent memory (fork of TinyClaw).</p>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">TypeScript</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Oracle</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Memory</span>
+                    </div>
+                </a>
+
+                <!-- OraclePageIndex -->
+                <a href="https://github.com/jasperan/OraclePageIndex" target="_blank"
+                   class="project-item card-hover bg-white border border-border rounded-xl p-6 group reveal d1" data-category="ai oracle tools">
+                    <div class="flex items-start justify-between mb-3">
+                        <span class="text-xs font-medium text-accent bg-accent-light px-2.5 py-1 rounded-full">AI + Oracle</span>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2 group-hover:text-accent transition-colors">OraclePageIndex</h3>
+                    <p class="text-muted text-sm leading-relaxed mb-4">Oracle AI Database-powered document intelligence with SQL Property Graphs, vectorless RAG, and knowledge graph visualization.</p>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Python</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Oracle</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">RAG</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Graphs</span>
+                    </div>
+                </a>
+
+                <!-- continual-learning -->
+                <a href="https://github.com/jasperan/continual-learning" target="_blank"
+                   class="project-item card-hover bg-white border border-border rounded-xl p-6 group reveal d2" data-category="ai">
+                    <div class="flex items-start justify-between mb-3">
+                        <span class="text-xs font-medium text-accent bg-accent-light px-2.5 py-1 rounded-full">AI + Research</span>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2 group-hover:text-accent transition-colors">continual-learning</h3>
+                    <p class="text-muted text-sm leading-relaxed mb-4">Research and efforts around JiT (Just-in-Time) and continual learning for LLMs.</p>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Python</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">LLM</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Research</span>
+                    </div>
+                </a>
+
+                <!-- agent-reasoning -->
+                <a href="https://github.com/jasperan/agent-reasoning" target="_blank"
+                   class="project-item card-hover bg-white border border-border rounded-xl p-6 group reveal d3" data-category="ai agents">
+                    <div class="flex items-start justify-between mb-3">
+                        <span class="text-xs font-medium text-accent bg-accent-light px-2.5 py-1 rounded-full">AI + Agents</span>
+                        <span class="text-sm tabular text-faint font-medium">4 stars</span>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2 group-hover:text-accent transition-colors">agent-reasoning</h3>
+                    <p class="text-muted text-sm leading-relaxed mb-4">Implementation of agent reasoning capabilities to expand standard LLM reasoning.</p>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Python</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">LLM</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Reasoning</span>
+                    </div>
+                </a>
+
+                <!-- agent-tooling -->
+                <a href="https://github.com/jasperan/agent-tooling" target="_blank"
+                   class="project-item card-hover bg-white border border-border rounded-xl p-6 group reveal d4" data-category="agents tools">
+                    <div class="flex items-start justify-between mb-3">
+                        <span class="text-xs font-medium text-accent bg-accent-light px-2.5 py-1 rounded-full">Agents + Tools</span>
+                        <span class="text-sm tabular text-faint font-medium">1 star</span>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2 group-hover:text-accent transition-colors">agent-tooling</h3>
+                    <p class="text-muted text-sm leading-relaxed mb-4">Agent tooling capabilities for AI Agents.</p>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Python</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Agents</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Tools</span>
+                    </div>
+                </a>
+
+                <!-- tokenwatch -->
+                <a href="https://github.com/jasperan/tokenwatch" target="_blank"
+                   class="project-item card-hover bg-white border border-border rounded-xl p-6 group reveal d5" data-category="tools">
+                    <div class="flex items-start justify-between mb-3">
+                        <span class="text-xs font-medium text-accent bg-accent-light px-2.5 py-1 rounded-full">Tools</span>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2 group-hover:text-accent transition-colors">tokenwatch</h3>
+                    <p class="text-muted text-sm leading-relaxed mb-4">Monitor Anthropic and OpenAI usage in your local environment.</p>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Python</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">LLM</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Monitoring</span>
+                    </div>
+                </a>
+
+                <!-- draw-realtime -->
+                <a href="https://github.com/jasperan/draw-realtime" target="_blank"
+                   class="project-item card-hover bg-white border border-border rounded-xl p-6 group reveal d6" data-category="ai">
+                    <div class="flex items-start justify-between mb-3">
+                        <span class="text-xs font-medium text-accent bg-accent-light px-2.5 py-1 rounded-full">AI + Art</span>
+                        <span class="text-sm tabular text-faint font-medium">3 stars</span>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2 group-hover:text-accent transition-colors">draw-realtime</h3>
+                    <p class="text-muted text-sm leading-relaxed mb-4">Draw stories in real time with StreamDiffusion, TTS and ControlNet.</p>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Python</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">StreamDiffusion</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">TTS</span>
+                    </div>
+                </a>
+
+                <!-- waze-osint-tracker -->
+                <a href="https://github.com/jasperan/waze-osint-tracker" target="_blank"
+                   class="project-item card-hover bg-white border border-border rounded-xl p-6 group reveal d1" data-category="osint">
+                    <div class="flex items-start justify-between mb-3">
+                        <span class="text-xs font-medium text-accent bg-accent-light px-2.5 py-1 rounded-full">OSINT</span>
+                        <span class="text-sm tabular text-faint font-medium">1 star</span>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2 group-hover:text-accent transition-colors">waze-osint-tracker</h3>
+                    <p class="text-muted text-sm leading-relaxed mb-4">Near-real time visualization of all world events logged in Waze.</p>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Python</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">OSINT</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Visualization</span>
+                    </div>
+                </a>
+
+                <!-- haveibeensniped -->
+                <a href="https://github.com/jasperan/haveibeensniped" target="_blank"
+                   class="project-item card-hover bg-white border border-border rounded-xl p-6 group reveal d2" data-category="gaming">
+                    <div class="flex items-start justify-between mb-3">
+                        <span class="text-xs font-medium text-accent bg-accent-light px-2.5 py-1 rounded-full">Gaming</span>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2 group-hover:text-accent transition-colors">haveibeensniped</h3>
+                    <p class="text-muted text-sm leading-relaxed mb-4">League of Legends project to check if you've been sniped in game.</p>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Python</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">LoL</span>
+                    </div>
+                </a>
+
+                <!-- opentranscribe -->
+                <a href="https://github.com/jasperan/opentranscribe" target="_blank"
+                   class="project-item card-hover bg-white border border-border rounded-xl p-6 group reveal d3" data-category="tools">
+                    <div class="flex items-start justify-between mb-3">
+                        <span class="text-xs font-medium text-accent bg-accent-light px-2.5 py-1 rounded-full">Tools</span>
+                        <span class="text-sm tabular text-faint font-medium">1 star</span>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2 group-hover:text-accent transition-colors">opentranscribe</h3>
+                    <p class="text-muted text-sm leading-relaxed mb-4">Open-source based transcriptions for audio files.</p>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">TypeScript</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Audio</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Transcription</span>
+                    </div>
+                </a>
+
+                <!-- foosball-synthesia-api -->
+                <a href="https://github.com/jasperan/foosball-synthesia-api" target="_blank"
+                   class="project-item card-hover bg-white border border-border rounded-xl p-6 group reveal d4" data-category="ai tools">
+                    <div class="flex items-start justify-between mb-3">
+                        <span class="text-xs font-medium text-accent bg-accent-light px-2.5 py-1 rounded-full">AI + Video</span>
+                        <span class="text-sm tabular text-faint font-medium">2 stars</span>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2 group-hover:text-accent transition-colors">foosball-synthesia-api</h3>
+                    <p class="text-muted text-sm leading-relaxed mb-4">Python integration with Synthesia API for AI Video Generation.</p>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Python</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">AI Video</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">API</span>
+                    </div>
+                </a>
+
+                <!-- cAST-efficient-ollama -->
+                <a href="https://github.com/jasperan/cAST-efficient-ollama" target="_blank"
+                   class="project-item card-hover bg-white border border-border rounded-xl p-6 group reveal d5" data-category="ai tools">
+                    <div class="flex items-start justify-between mb-3">
+                        <span class="text-xs font-medium text-accent bg-accent-light px-2.5 py-1 rounded-full">AI + Performance</span>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2 group-hover:text-accent transition-colors">cAST-efficient-ollama</h3>
+                    <p class="text-muted text-sm leading-relaxed mb-4">Demonstrating performance advantages using Code Abstract Syntax Tree (cAST) rather than random chunk splits.</p>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Python</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Ollama</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">AST</span>
+                    </div>
+                </a>
+
+                <!-- 3d-audio -->
+                <a href="https://github.com/jasperan/3d-audio" target="_blank"
+                   class="project-item card-hover bg-white border border-border rounded-xl p-6 group reveal d6" data-category="tools">
+                    <div class="flex items-start justify-between mb-3">
+                        <span class="text-xs font-medium text-accent bg-accent-light px-2.5 py-1 rounded-full">Audio</span>
+                        <span class="text-sm tabular text-faint font-medium">1 star</span>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2 group-hover:text-accent transition-colors">3d-audio</h3>
+                    <p class="text-muted text-sm leading-relaxed mb-4">3D audio tests and experiments.</p>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">TypeScript</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">Audio</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">3D</span>
+                    </div>
+                </a>
+
+                <!-- antigravity-webrtc -->
+                <a href="https://github.com/jasperan/antigravity-webrtc" target="_blank"
+                   class="project-item card-hover bg-white border border-border rounded-xl p-6 group reveal d1" data-category="tools">
+                    <div class="flex items-start justify-between mb-3">
+                        <span class="text-xs font-medium text-accent bg-accent-light px-2.5 py-1 rounded-full">WebRTC</span>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2 group-hover:text-accent transition-colors">antigravity-webrtc</h3>
+                    <p class="text-muted text-sm leading-relaxed mb-4">Test project to implement a WebRTC server to communicate with Google Antigravity's chat.</p>
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">JavaScript</span>
+                        <span class="text-xs text-faint bg-surface px-2 py-0.5 rounded">WebRTC</span>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="max-w-6xl mx-auto px-6 lg:px-8"><div class="h-px bg-border"></div></div>
+
+    <!-- Speaking Section -->
+    <section id="speaking" class="py-24 md:py-32 px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-12 gap-12 md:gap-16">
+                <div class="md:col-span-4 reveal">
+                    <p class="text-accent font-medium text-sm tracking-wide uppercase mb-4">Speaking</p>
+                    <h2 class="font-display text-4xl md:text-5xl tracking-tight leading-[0.95]">
+                        Conferences<br>&amp; <em>talks</em>
+                    </h2>
+                </div>
+                <div class="md:col-span-8">
+                    <div class="space-y-0">
+
+                        <!-- Year: 2026 -->
+                        <div class="reveal d1">
+                            <div class="text-xs font-semibold text-accent tracking-wide uppercase py-3 border-b border-border">2026</div>
+                        </div>
+                        <a href="#" class="reveal d2 flex items-baseline gap-4 py-5 border-b border-border group hover:bg-surface/50 -mx-4 px-4 rounded transition-colors">
+                            <span class="text-sm text-faint font-medium w-20 flex-shrink-0 tabular">Feb</span>
+                            <div class="flex-1">
+                                <div class="font-semibold group-hover:text-accent transition-colors">DevWeek San Jose, CA</div>
+                                <div class="text-sm text-muted mt-0.5">Building the Brain and Backbone of Enterprise Agents</div>
+                            </div>
+                        </a>
+                        <a href="#" class="reveal d3 flex items-baseline gap-4 py-5 border-b border-border group hover:bg-surface/50 -mx-4 px-4 rounded transition-colors">
+                            <span class="text-sm text-faint font-medium w-20 flex-shrink-0 tabular">Feb</span>
+                            <div class="flex-1">
+                                <div class="font-semibold group-hover:text-accent transition-colors">AICamp San Francisco, CA</div>
+                                <div class="text-sm text-muted mt-0.5">Memory Engineering</div>
+                            </div>
+                        </a>
+
+                        <!-- Year: 2025 -->
+                        <div class="reveal d1">
+                            <div class="text-xs font-semibold text-accent tracking-wide uppercase py-3 border-b border-border mt-4">2025</div>
+                        </div>
+                        <a href="#" class="reveal d2 flex items-baseline gap-4 py-5 border-b border-border group hover:bg-surface/50 -mx-4 px-4 rounded transition-colors">
+                            <span class="text-sm text-faint font-medium w-20 flex-shrink-0 tabular">Nov</span>
+                            <div class="flex-1">
+                                <div class="font-semibold group-hover:text-accent transition-colors">Kubecon Atlanta, GA</div>
+                                <div class="text-sm text-muted mt-0.5">Agent2Agent Protocol Integration in Multi-Agent RAG System</div>
+                            </div>
+                        </a>
+                        <div class="reveal d3 flex items-baseline gap-4 py-5 border-b border-border -mx-4 px-4">
+                            <span class="text-sm text-faint font-medium w-20 flex-shrink-0 tabular">May</span>
+                            <div class="flex-1">
+                                <div class="font-semibold">DevLive Tour Berlin</div>
+                                <div class="text-sm text-muted mt-0.5">AI Developer Conference</div>
+                            </div>
+                        </div>
+                        <div class="reveal d4 flex items-baseline gap-4 py-5 border-b border-border -mx-4 px-4">
+                            <span class="text-sm text-faint font-medium w-20 flex-shrink-0 tabular">Mar</span>
+                            <div class="flex-1">
+                                <div class="font-semibold">Oracle CloudWorld Tour Madrid</div>
+                                <div class="text-sm text-muted mt-0.5">Cloud &amp; AI Conference</div>
+                            </div>
+                        </div>
+
+                        <!-- Year: 2024 -->
+                        <div class="reveal d1">
+                            <div class="text-xs font-semibold text-accent tracking-wide uppercase py-3 border-b border-border mt-4">2024</div>
+                        </div>
+                        <div class="reveal d2 flex items-baseline gap-4 py-5 border-b border-border -mx-4 px-4">
+                            <span class="text-sm text-faint font-medium w-20 flex-shrink-0 tabular">Nov</span>
+                            <div class="flex-1">
+                                <div class="font-semibold">Kubecon Salt Lake City, UT</div>
+                                <div class="text-sm text-muted mt-0.5">Cloud Native Conference</div>
+                            </div>
+                        </div>
+                        <div class="reveal d3 flex items-baseline gap-4 py-5 border-b border-border -mx-4 px-4">
+                            <span class="text-sm text-faint font-medium w-20 flex-shrink-0 tabular">Mar</span>
+                            <div class="flex-1">
+                                <div class="font-semibold">Kubecon Paris</div>
+                                <div class="text-sm text-muted mt-0.5">Cloud Native Conference</div>
+                            </div>
+                        </div>
+                        <div class="reveal d4 flex items-baseline gap-4 py-5 border-b border-border -mx-4 px-4">
+                            <span class="text-sm text-faint font-medium w-20 flex-shrink-0 tabular">Mar</span>
+                            <div class="flex-1">
+                                <div class="font-semibold">DevLive Tour London</div>
+                                <div class="text-sm text-muted mt-0.5">Developer Conference</div>
+                            </div>
+                        </div>
+
+                        <!-- Year: 2022-2024 -->
+                        <div class="reveal d1">
+                            <div class="text-xs font-semibold text-accent tracking-wide uppercase py-3 border-b border-border mt-4">2022 &ndash; 2024</div>
+                        </div>
+                        <div class="reveal d2 flex items-baseline gap-4 py-5 border-b border-border -mx-4 px-4">
+                            <span class="text-sm text-faint font-medium w-20 flex-shrink-0 tabular">Annual</span>
+                            <div class="flex-1">
+                                <div class="font-semibold">Oracle CloudWorld Las Vegas, NV</div>
+                                <div class="text-sm text-muted mt-0.5">Annual cloud conference (3 consecutive years)</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="max-w-6xl mx-auto px-6 lg:px-8"><div class="h-px bg-border"></div></div>
+
+    <!-- Media Section -->
+    <section id="media" class="py-24 md:py-32 px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto">
+            <p class="text-accent font-medium text-sm tracking-wide uppercase mb-4 reveal">Media</p>
+            <h2 class="font-display text-4xl md:text-5xl lg:text-6xl tracking-tight leading-[0.95] mb-16 reveal d1">
+                Videos, articles,<br>&amp; <em>appearances</em>
+            </h2>
+
+            <!-- Photos -->
+            <div class="grid md:grid-cols-2 gap-6 mb-16">
+                <div class="relative rounded-xl overflow-hidden group reveal d2">
+                    <img src="https://github.com/jasperan/jasperan/assets/20752424/32a64be8-5649-479e-b120-7a0ac4138f90"
+                         alt="Jasper Nacho Martinez, AI Engineer"
+                         class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-ink/60 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6">
+                        <div class="text-xs font-medium text-accent-light tracking-wide uppercase mb-1">Profile</div>
+                        <div class="text-white font-semibold text-lg">AI Engineer &amp; Developer Advocate</div>
+                    </div>
+                </div>
+                <div class="relative rounded-xl overflow-hidden group reveal d3">
+                    <img src="https://user-images.githubusercontent.com/20752424/214705966-dd90d511-713b-4322-b620-bd2946857f02.jpg"
+                         alt="Oracle CloudWorld 2022, Las Vegas"
+                         class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-ink/60 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-6">
+                        <div class="text-xs font-medium text-accent-light tracking-wide uppercase mb-1">CloudWorld 2022</div>
+                        <div class="text-white font-semibold text-lg">Las Vegas, Nevada</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 md:gap-16">
+
+                <!-- Videos -->
+                <div>
+                    <h3 class="font-display text-2xl italic mb-8 reveal">Videos</h3>
+                    <div class="space-y-4">
+                        <a href="https://www.youtube.com/watch?v=JJCq21Dc-Us" target="_blank" class="block bg-white border border-border rounded-xl p-5 card-hover group reveal d1">
+                            <div class="text-xs font-medium text-accent mb-2">NetworkChuck</div>
+                            <div class="font-semibold group-hover:text-accent transition-colors">You NEED to learn Machine Learning, RIGHT NOW!!</div>
+                        </a>
+                        <a href="https://github.com/oracle-devrel/leagueoflegends-optimizer" target="_blank" class="block bg-white border border-border rounded-xl p-5 card-hover group reveal d2">
+                            <div class="text-xs font-medium text-accent mb-2">League of Legends Series</div>
+                            <div class="font-semibold group-hover:text-accent transition-colors mb-2">ML with LoL Complete Workshop Series</div>
+                            <div class="text-sm text-muted space-y-1">
+                                <div>Data Extraction</div>
+                                <div>Model Building with scikit-learn &amp; AutoGluon</div>
+                                <div>Introduction to Neural Networks</div>
+                            </div>
+                        </a>
+                        <a href="https://youtu.be/Zj4GGbrEekQ" target="_blank" class="block bg-white border border-border rounded-xl p-5 card-hover group reveal d3">
+                            <div class="text-xs font-medium text-accent mb-2">Training LLMs</div>
+                            <div class="font-semibold group-hover:text-accent transition-colors">Training Large Language Models in Oracle Cloud</div>
+                        </a>
+                        <a href="https://www.youtube.com/watch?v=9fWMl70HYPQ" target="_blank" class="block bg-white border border-border rounded-xl p-5 card-hover group reveal d4">
+                            <div class="text-xs font-medium text-accent mb-2">AICamp &middot; Sep 2025</div>
+                            <div class="font-semibold group-hover:text-accent transition-colors">AI Webinar with Oracle (Ep 8) &ndash; MongoDB to Oracle</div>
+                        </a>
+                        <a href="https://www.youtube.com/watch?v=cn09bvgxcIY" target="_blank" class="block bg-white border border-border rounded-xl p-5 card-hover group reveal d5">
+                            <div class="text-xs font-medium text-accent mb-2">Oracle Developers &middot; Jun 2024</div>
+                            <div class="font-semibold group-hover:text-accent transition-colors">Cloud Coaching: Java meets Generative AI</div>
+                        </a>
+                        <a href="https://www.youtube.com/watch?v=cypL1LBQBUU" target="_blank" class="block bg-white border border-border rounded-xl p-5 card-hover group reveal d6">
+                            <div class="text-xs font-medium text-accent mb-2">T3 Podcast &middot; Mar 2024</div>
+                            <div class="font-semibold group-hover:text-accent transition-colors">Ep5 T3: con Nacho Martinez sobre IA con Oracle</div>
+                        </a>
+                        <a href="https://www.youtube.com/watch?v=lIceAEjkzUs" target="_blank" class="block bg-white border border-border rounded-xl p-5 card-hover group reveal d1">
+                            <div class="text-xs font-medium text-accent mb-2">Tech With Nanor &middot; Mar 2023</div>
+                            <div class="font-semibold group-hover:text-accent transition-colors">Exploring the Power of AI with Nacho Martinez from Oracle</div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Articles -->
+                <div>
+                    <h3 class="font-display text-2xl italic mb-8 reveal">Articles</h3>
+                    <div class="space-y-4">
+                        <a href="https://medium.com/oracledevs/the-great-ai-context-debate-why-filesystem-vs-database-is-the-wrong-question-3454e27c27f6" target="_blank"
+                           class="block bg-white border border-border rounded-xl p-5 card-hover group reveal d2">
+                            <div class="text-xs font-medium text-accent mb-2">AI &amp; Agents</div>
+                            <div class="font-semibold group-hover:text-accent transition-colors">The Great AI Context Debate: Filesystem vs Database</div>
+                        </a>
+                        <a href="https://medium.com/oracledevs/build-a-scalable-multi-agent-rag-system-with-a2a-protocol-and-langchain-0ac0255976f1" target="_blank"
+                           class="block bg-white border border-border rounded-xl p-5 card-hover group reveal d3">
+                            <div class="text-xs font-medium text-accent mb-2">Multi-Agent RAG</div>
+                            <div class="font-semibold group-hover:text-accent transition-colors">Build a Scalable Multi-Agent RAG System with A2A Protocol</div>
+                        </a>
+                        <a href="https://github.com/oracle-devrel/leagueoflegends-optimizer/blob/main/articles/article1.md" target="_blank"
+                           class="block bg-white border border-border rounded-xl p-5 card-hover group reveal d4">
+                            <div class="text-xs font-medium text-accent mb-2">Gaming ML Series</div>
+                            <div class="font-semibold group-hover:text-accent transition-colors mb-2">League of Legends Optimizer Article Series</div>
+                            <div class="text-sm text-muted space-y-1">
+                                <div>Data Extraction &amp; Processing</div>
+                                <div>Adversarial AI Models</div>
+                                <div>Real-Time Predictions</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 md:py-32 px-6 lg:px-8 bg-ink text-cream">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-12 gap-12 md:gap-16">
+                <div class="md:col-span-7 reveal">
+                    <p class="text-accent font-medium text-sm tracking-wide uppercase mb-4" style="color: #5EEAD4;">Connect</p>
+                    <h2 class="font-display text-4xl md:text-5xl lg:text-6xl tracking-tight leading-[0.95] mb-8">
+                        Let's build<br><em>something</em>
+                    </h2>
+                    <p class="text-lg leading-relaxed mb-12" style="color: #A8A29E;">
+                        Interested in AI, ML, or collaboration? I'm always open to discussing new projects, ideas, or opportunities to work together.
+                    </p>
+                    <div class="space-y-4">
+                        <a href="https://github.com/jasperan" target="_blank"
+                           class="flex items-center justify-between py-5 border-b group reveal d1" style="border-color: #292524;">
+                            <div>
+                                <div class="text-xs font-medium tracking-wide uppercase mb-1" style="color: #5EEAD4;">GitHub</div>
+                                <div class="font-semibold text-lg group-hover:text-teal-300 transition-colors">github.com/jasperan</div>
+                            </div>
+                            <svg class="w-5 h-5 text-faint group-hover:text-teal-300 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                        </a>
+                        <a href="https://www.linkedin.com/in/jasperan/" target="_blank"
+                           class="flex items-center justify-between py-5 border-b group reveal d2" style="border-color: #292524;">
+                            <div>
+                                <div class="text-xs font-medium tracking-wide uppercase mb-1" style="color: #5EEAD4;">LinkedIn</div>
+                                <div class="font-semibold text-lg group-hover:text-teal-300 transition-colors">linkedin.com/in/jasperan</div>
+                            </div>
+                            <svg class="w-5 h-5 text-faint group-hover:text-teal-300 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                        </a>
+                        <a href="https://stackoverflow.com/users/9151930/jasper?tab=profile" target="_blank"
+                           class="flex items-center justify-between py-5 border-b group reveal d3" style="border-color: #292524;">
+                            <div>
+                                <div class="text-xs font-medium tracking-wide uppercase mb-1" style="color: #5EEAD4;">Stack Overflow</div>
+                                <div class="font-semibold text-lg group-hover:text-teal-300 transition-colors">stackoverflow.com/users/9151930</div>
+                            </div>
+                            <svg class="w-5 h-5 text-faint group-hover:text-teal-300 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="md:col-span-5 flex items-center reveal d4">
+                    <div class="bg-accent-dark/30 rounded-2xl p-8 md:p-10 w-full" style="background: rgba(13,148,136,0.12);">
+                        <h3 class="font-display text-2xl italic mb-6">Follow my work</h3>
+                        <p class="leading-relaxed mb-8" style="color: #A8A29E;">
+                            Everything I build goes open source. Follow me if you're into artificial intelligence, gaming, and projects that push boundaries.
+                        </p>
+                        <div class="space-y-3 text-sm font-medium">
+                            <div class="flex items-center gap-3">
+                                <div class="w-1.5 h-1.5 rounded-full" style="background: #5EEAD4;"></div>
+                                AI &amp; Agents
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-1.5 h-1.5 rounded-full" style="background: #5EEAD4;"></div>
+                                Gaming ML
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-1.5 h-1.5 rounded-full" style="background: #5EEAD4;"></div>
+                                Open Source
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-1.5 h-1.5 rounded-full" style="background: #5EEAD4;"></div>
+                                Developer Advocacy
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 px-6 lg:px-8 bg-ink border-t" style="border-color: #292524;">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="text-sm" style="color: #78716C;">
+                &copy; 2026 jasperan
+            </div>
+            <div class="flex items-center gap-6 text-sm font-medium">
+                <a href="https://github.com/jasperan" target="_blank" class="hover:text-teal-300 transition-colors" style="color: #A8A29E;">GitHub</a>
+                <a href="https://www.linkedin.com/in/jasperan/" target="_blank" class="hover:text-teal-300 transition-colors" style="color: #A8A29E;">LinkedIn</a>
+                <a href="https://stackoverflow.com/users/9151930/jasper?tab=profile" target="_blank" class="hover:text-teal-300 transition-colors" style="color: #A8A29E;">StackOverflow</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            const expanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+            mobileMenuBtn.setAttribute('aria-expanded', !expanded);
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        // Project category filter
+        const catBtns = document.querySelectorAll('.cat-btn');
+        const projectItems = document.querySelectorAll('.project-item');
+
+        catBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                catBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const cat = btn.dataset.category;
+
+                projectItems.forEach(item => {
+                    if (cat === 'all' || item.dataset.category.includes(cat)) {
+                        item.classList.remove('hidden-card');
+                    } else {
+                        item.classList.add('hidden-card');
+                    }
+                });
+            });
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }, { passive: false });
+        });
+
+        // Scroll-triggered reveal animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Active nav highlighting
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        const navObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => {
+                        link.classList.toggle('active',
+                            link.getAttribute('href') === '#' + entry.target.id);
+                    });
+                }
+            });
+        }, { threshold: 0.3 });
+
+        sections.forEach(section => navObserver.observe(section));
+
+        // Keyboard navigation
+        document.querySelectorAll('.cat-btn, .project-item').forEach(el => {
+            el.setAttribute('tabindex', '0');
+            el.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    el.click();
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
