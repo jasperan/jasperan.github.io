@@ -79,3 +79,18 @@ progress.md
 *_REPORT.md
 *_IMPROVEMENTS.md
 *_EXECUTION.md
+
+# Agent/skill directories (local-only)
+.agents/
+.claude/
+.crush/
+.openhands/
+.serena/
+
+# Generated content (local only)
+content/
+
+# In-flight work
+.astro/
+.herenow/
+.omc/
