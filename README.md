@@ -33,8 +33,13 @@ Pushes to `main` are served automatically by GitHub Pages at [jasperan.github.io
 
 ## Structure
 
-| File | Purpose |
+| Path | Purpose |
 |------|---------|
-| `index.html` | Main portfolio page (self-contained HTML + Tailwind CDN) |
-| `assets/` | Screenshots and images |
-| `dist/` | Built assets (if any) |
+| `index.html` | Original portfolio (dark/brutalist) — served at [`/`](https://jasperan.github.io/) |
+| `v2/index.html` | Redesigned portfolio (editorial/cream) — served at [`/v2/`](https://jasperan.github.io/v2/) |
+| `index-v2.html` | Intermediate redesign draft (kept for reference) |
+| `assets/screenshots/` | Section screenshots used above |
+| `index-original.html` | Earliest version, kept as archive |
+| `dist/`, `docs/`, `old/` | Legacy build artifacts (inactive) |
+
+Both `/` and `/v2/` deploy independently on GitHub Pages — the redesign lives side-by-side with the original rather than replacing it.
