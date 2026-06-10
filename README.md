@@ -40,4 +40,4 @@ Pushes to `main` are served automatically by GitHub Pages at [jasperan.github.io
 | `index-v2.html` | Intermediate redesign draft (kept for reference) |
 | `index-original.html` | Earliest version, kept as archive |
 | `assets/screenshots/` | Section screenshots used above |
-| `old/`, `dist/`, `docs/` | Legacy build artifacts (inactive) |
+| `old/` | Archived legacy Mobirise output (inactive) |

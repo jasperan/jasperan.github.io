@@ -14,6 +14,8 @@
     <meta property="og:url" content="https://jasperan.github.io/">
     <meta name="twitter:card" content="summary_large_image">
 
+    <meta name="theme-color" content="#0E0D0B">
+
     <!-- Theme detection — runs BEFORE Tailwind/CSS to prevent FOUC -->
     <script>
     (function(){
@@ -21,6 +23,8 @@
         var saved = localStorage.getItem('jasperan-theme');
         var theme = saved === 'light' ? 'light' : 'dark';
         document.documentElement.setAttribute('data-theme', theme);
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.content = theme === 'light' ? '#FAFAF8' : '#0E0D0B';
       } catch(e) { document.documentElement.setAttribute('data-theme', 'dark'); }
     })();
     </script>
@@ -74,7 +78,6 @@
             --moss:      #1F2A25;
             --grain-op:  0.06;
             --shadow:    0 22px 42px -28px rgba(0,0,0,0.6);
-            --theme-meta: #0E0D0B;
         }
         :root[data-theme="light"] {
             --bg:        #FAFAF8;
@@ -91,7 +94,6 @@
             --moss:      #1F2A25;
             --grain-op:  0.035;
             --shadow:    0 22px 42px -28px rgba(17,17,16,0.18);
-            --theme-meta: #FAFAF8;
         }
 
         html { scroll-behavior: smooth; }
@@ -689,7 +691,7 @@
             <div class="col-span-12 lg:col-span-6 lg:col-start-7 flex items-end">
                 <p class="text-lg text-muted leading-relaxed max-w-[55ch] reveal d1">
                     Nine I'd actually point someone to — including two brand-new
-                    Oracle memory tools just shipped. Star counts are live from GitHub.
+                    Oracle memory tools just shipped. Star counts are snapshotted from GitHub.
                 </p>
             </div>
         </div>
@@ -1636,14 +1638,9 @@
             const next = current === 'dark' ? 'light' : 'dark';
             document.documentElement.setAttribute('data-theme', next);
             try { localStorage.setItem('jasperan-theme', next); } catch(e){}
-            // Update meta theme-color
-            let meta = document.querySelector('meta[name="theme-color"]');
-            if (!meta) {
-                meta = document.createElement('meta');
-                meta.name = 'theme-color';
-                document.head.appendChild(meta);
-            }
-            meta.content = next === 'dark' ? '#0E0D0B' : '#FAFAF8';
+            // Update meta theme-color (static tag exists in <head>)
+            const meta = document.querySelector('meta[name="theme-color"]');
+            if (meta) meta.content = next === 'dark' ? '#0E0D0B' : '#FAFAF8';
         });
     }
 })();

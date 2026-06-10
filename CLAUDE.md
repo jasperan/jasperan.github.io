@@ -23,9 +23,9 @@ Push to `main`. GitHub Pages picks it up automatically at [jasperan.github.io](h
 
 | Path | Purpose |
 |------|---------|
-| `index.html` | Main portfolio page (self-contained) |
-| `index-original.html` | Original version, kept for reference |
+| `index.html` | Main portfolio page (self-contained), served at `/` |
+| `v1/index.html` | Archived brutalist version, served at `/v1/` |
+| `index-v2.html` | Intermediate redesign draft, kept for reference |
+| `index-original.html` | Earliest version, kept as archive |
 | `assets/screenshots/` | Portfolio section screenshots |
-| `dist/` | Built assets from Astro (legacy, not active) |
-| `docs/` | Astro output artifacts (legacy) |
-| `old/` | Archived older versions |
+| `old/` | Archived legacy Mobirise output |
