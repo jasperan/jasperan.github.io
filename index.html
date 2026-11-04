@@ -256,34 +256,28 @@
             border-color: rgba(255,255,255,0.14);
         }
         :root[data-theme="dark"] .bento-invert {
-            background: #F2EFE6;
-            color: #17140F;
-            border-color: #F2EFE6;
+            border-color: var(--ink);
         }
         :root[data-theme="dark"] .bento-invert .tag-soft {
-            color: #17140F;
-            background: rgba(0,0,0,0.08);
-            border-color: rgba(0,0,0,0.14);
+            color: var(--bg);
+            background: rgba(0,0,0,0.07);
+            border-color: rgba(0,0,0,0.13);
         }
         .bento-ember {
             background: var(--ember-soft);
-            border-color: var(--ember);
-        }
-        :root[data-theme="dark"] .bento-ember {
-            background: #2D1810;
-            border-color: #6B3220;
+            border-color: color-mix(in srgb, var(--ember) 45%, var(--border));
         }
 
         .proj-row {
             display: grid;
             grid-template-columns: 1fr auto;
             gap: 1.5rem;
-            padding: 1.4rem 0;
+            padding: 1.25rem 0;
             border-top: 1px solid var(--border);
-            transition: padding-left 260ms var(--easing);
+            transition: border-color 260ms var(--easing);
         }
         .proj-row:last-child { border-bottom: 1px solid var(--border); }
-        .proj-row:hover { padding-left: 0.5rem; }
+        .proj-row:hover { border-top-color: var(--muted); }
         .proj-row .proj-arrow {
             opacity: 0;
             transform: translateX(-6px);
@@ -302,7 +296,7 @@
             font-size: 0.82rem;
             border: 1px solid var(--border);
             color: var(--muted);
-            border-radius: 999px;
+            border-radius: 6px;
             background: var(--bg);
             transition: all 200ms var(--easing);
             cursor: pointer;
@@ -319,12 +313,10 @@
             grid-template-columns: 6.5rem 1fr auto;
             align-items: baseline;
             gap: 1.5rem;
-            padding: 1.1rem 0;
+            padding: 1.25rem 0;
             border-top: 1px solid var(--border);
-            transition: padding-left 260ms var(--easing);
         }
         .talk-row:last-child { border-bottom: 1px solid var(--border); }
-        .talk-row:hover { padding-left: 0.35rem; }
 
         .tag, .tag-soft {
             display: inline-block;
@@ -335,7 +327,7 @@
             color: var(--muted);
             background: var(--surface-2);
             border: 1px solid var(--border);
-            border-radius: 999px;
+            border-radius: 6px;
         }
         .tag-ember {
             color: var(--ember);
@@ -344,11 +336,12 @@
         }
         :root[data-theme="dark"] .tag-ember { color: var(--ember-2); }
         .tag-new {
-            color: var(--bg);
-            background: var(--ember);
+            color: var(--ember);
+            background: transparent;
             border-color: var(--ember);
             font-weight: 500;
         }
+        :root[data-theme="dark"] .tag-new { color: var(--ember-2); }
 
         a:focus-visible, button:focus-visible {
             outline: 2px solid var(--ember);
@@ -453,11 +446,16 @@
             border: 1px solid var(--border);
         }
         .photo-caption {
+            display: inline-block;
             font-family: 'Geist Mono', monospace;
-            font-size: 0.65rem;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: var(--muted);
+            font-size: 0.7rem;
+            letter-spacing: 0.02em;
+            color: var(--ink);
+            background: rgba(var(--bg-rgb), 0.82);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.2rem 0.5rem;
+            width: fit-content;
         }
 
         /* Backdrop for sticky header — uses theme color with alpha */
@@ -542,16 +540,13 @@
     <div class="max-w-[1400px] mx-auto px-5 md:px-10 grid grid-cols-12 gap-6 md:gap-10">
         <div class="col-span-12 lg:col-span-8 relative">
             <div class="flex items-center gap-3 mb-8 reveal">
-                <span class="relative flex h-2 w-2">
-                    <span class="absolute inline-flex h-full w-full rounded-full bg-ember opacity-75 animate-ping"></span>
-                    <span class="relative inline-flex rounded-full h-2 w-2 bg-ember"></span>
-                </span>
+                <span class="w-2 h-2 rounded-full bg-ember" aria-hidden="true"></span>
                 <span class="eyebrow">Available for select engagements · Madrid, ES</span>
             </div>
 
             <h1 class="h-display text-[clamp(3rem,9vw,7.2rem)] text-ink reveal d1">
                 I build AI agents<br>
-                that actually <span class="italic ember-stroke">ship</span>.
+                that actually <span class="ember-stroke">ship</span>.
             </h1>
 
             <p class="mt-10 max-w-[52ch] text-lg md:text-xl text-muted leading-relaxed reveal d2">
@@ -615,7 +610,7 @@
         <div class="col-span-12 lg:col-span-4">
             <div class="eyebrow mb-4 reveal">§ 01 · Focus</div>
             <h2 class="h-display text-5xl md:text-6xl text-ink reveal d1">
-                What I actually <span class="italic">work on</span>.
+                What I actually <span class="text-ember">work on</span>.
             </h2>
         </div>
 
@@ -639,7 +634,7 @@
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" class="opacity-70"><path d="M12 2v20M2 12h20"/></svg>
                     </div>
                     <h3 class="h-display text-3xl md:text-4xl leading-tight">
-                        Oracle AI Database as the <span class="italic text-ember">default</span> memory layer for autonomous agents.
+                        Oracle AI Database as the <span class="text-ember">default</span> memory layer for autonomous agents.
                     </h3>
                     <p class="mt-5 text-sm opacity-75 leading-relaxed max-w-[48ch]">
                         A portfolio of forks — <span class="font-mono">oraclaw</span>, <span class="font-mono">picooraclaw</span>,
@@ -691,7 +686,7 @@
             <div class="col-span-12 lg:col-span-5">
                 <div class="eyebrow mb-4 reveal">§ 02 · Selected</div>
                 <h2 class="h-display text-5xl md:text-7xl text-ink reveal d1">
-                    Projects — <span class="italic">the honest cut</span>.
+                    Projects — <span class="text-ember">the honest cut</span>.
                 </h2>
             </div>
             <div class="col-span-12 lg:col-span-6 lg:col-start-7 flex items-end">
@@ -811,7 +806,7 @@
             <a href="https://github.com/jasperan/onnx2oracle" target="_blank" rel="noopener" class="bento bento-ember md:col-span-3 reveal d5 block">
                 <div class="flex items-center justify-between mb-4">
                     <div class="flex items-center gap-2">
-                        <span class="tag tag-new">New · 2026</span>
+                        <span class="tag tag-new">New</span>
                         <span class="tag tag-ember">Oracle · Python</span>
                     </div>
                     <span class="star-badge">
@@ -830,7 +825,7 @@
             <a href="https://github.com/jasperan/oramemvid" target="_blank" rel="noopener" class="bento md:col-span-3 reveal d6 block">
                 <div class="flex items-center justify-between mb-4">
                     <div class="flex items-center gap-2">
-                        <span class="tag tag-new">New · 2026</span>
+                        <span class="tag tag-new">New</span>
                         <span class="tag">Memory · Python</span>
                     </div>
                     <span class="star-badge">
@@ -885,7 +880,7 @@
             <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
                 <div>
                     <div class="eyebrow mb-3">§ 03 · Everything else</div>
-                    <h3 class="h-display text-4xl md:text-5xl text-ink">The <span class="italic">full inventory</span>.</h3>
+                    <h3 class="h-display text-4xl md:text-5xl text-ink">The <span class="text-ember">full inventory</span>.</h3>
                     <p class="mt-2 text-sm text-muted">Sorted by GitHub stars, descending.</p>
                 </div>
                 <div id="filters" class="flex flex-wrap gap-2" role="tablist" aria-label="Project filters">
@@ -906,7 +901,7 @@
                             <span class="font-mono text-sm text-ink">whatsapp-osint</span>
                             <span class="tag">Python</span>
                             <span class="tag">Selenium</span>
-                            <span class="star-badge text-xs">★ 1,348</span>
+                            <span class="star-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><use href="#i-star"/></svg> 1,348</span>
                         </div>
                         <p class="mt-2 text-muted leading-relaxed max-w-[75ch]">Logs WhatsApp online/offline transitions for any number in the world.</p>
                     </div>
@@ -919,7 +914,7 @@
                             <span class="font-mono text-sm text-ink">oracle-ai-developer-hub</span>
                             <span class="tag">Jupyter</span>
                             <span class="tag">Oracle</span>
-                            <span class="star-badge text-xs">★ 228</span>
+                            <span class="star-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><use href="#i-star"/></svg> 228</span>
                         </div>
                         <p class="mt-2 text-muted leading-relaxed max-w-[75ch]">Curated technical resources for AI developers on Oracle AI Database and OCI — notebooks, reference architectures, runnable examples.</p>
                     </div>
@@ -932,7 +927,7 @@
                             <span class="font-mono text-sm text-ink">leagueoflegends-optimizer</span>
                             <span class="tag">Python</span>
                             <span class="tag">ML</span>
-                            <span class="star-badge text-xs">★ 149</span>
+                            <span class="star-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><use href="#i-star"/></svg> 149</span>
                         </div>
                         <p class="mt-2 text-muted leading-relaxed max-w-[75ch]">End-to-end ML pipeline: Riot API extraction, feature engineering, real-time match predictions.</p>
                     </div>
@@ -945,7 +940,7 @@
                             <span class="font-mono text-sm text-ink">picooraclaw</span>
                             <span class="tag">Go</span>
                             <span class="tag">Oracle AI DB</span>
-                            <span class="star-badge text-xs">★ 25</span>
+                            <span class="star-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><use href="#i-star"/></svg> 25</span>
                         </div>
                         <p class="mt-2 text-muted leading-relaxed max-w-[75ch]">PicoClaw fork with Oracle AI Database as the sole persistence layer — flagship of the oraclaw family.</p>
                     </div>
@@ -958,7 +953,7 @@
                             <span class="font-mono text-sm text-ink">agent-reasoning</span>
                             <span class="tag">Python</span>
                             <span class="tag">Research</span>
-                            <span class="star-badge text-xs">★ 7</span>
+                            <span class="star-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><use href="#i-star"/></svg> 7</span>
                         </div>
                         <p class="mt-2 text-muted leading-relaxed max-w-[75ch]">Expands standard LLM reasoning with structured planning and reflection loops. Benchmarks included.</p>
                     </div>
@@ -970,7 +965,7 @@
                             <span class="font-mono text-sm text-ink">ragcli</span>
                             <span class="tag">Python</span>
                             <span class="tag">RAG</span>
-                            <span class="star-badge text-xs">★ 7</span>
+                            <span class="star-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><use href="#i-star"/></svg> 7</span>
                         </div>
                         <p class="mt-2 text-muted leading-relaxed max-w-[75ch]">A stupidly easy RAG CLI for Oracle AI Database — Rich terminal UI, sensible defaults, zero YAML.</p>
                     </div>
@@ -983,7 +978,7 @@
                             <span class="font-mono text-sm text-ink">draw-realtime</span>
                             <span class="tag">Python</span>
                             <span class="tag">Diffusers</span>
-                            <span class="star-badge text-xs">★ 4</span>
+                            <span class="star-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><use href="#i-star"/></svg> 4</span>
                         </div>
                         <p class="mt-2 text-muted leading-relaxed max-w-[75ch]">Real-time story drawing with StreamDiffusion, TTS, and ControlNet.</p>
                     </div>
@@ -996,7 +991,7 @@
                             <span class="font-mono text-sm text-ink">onnx2oracle</span>
                             <span class="tag">Python</span>
                             <span class="tag">ONNX</span>
-                            <span class="tag tag-new">New · 2026</span>
+                            <span class="tag tag-new">New</span>
                         </div>
                         <p class="mt-2 text-muted leading-relaxed max-w-[75ch]">Load ONNX embedding models into Oracle AI Database with a single command.</p>
                     </div>
@@ -1008,7 +1003,7 @@
                             <span class="font-mono text-sm text-ink">oramemvid</span>
                             <span class="tag">Python</span>
                             <span class="tag">Memory</span>
-                            <span class="tag tag-new">New · 2026</span>
+                            <span class="tag tag-new">New</span>
                         </div>
                         <p class="mt-2 text-muted leading-relaxed max-w-[75ch]">An AI memory layer for agents, backed entirely by Oracle Database. Inspired by memvid.</p>
                     </div>
@@ -1021,7 +1016,7 @@
                             <span class="font-mono text-sm text-ink">emotion-engine</span>
                             <span class="tag">Python</span>
                             <span class="tag">Agents</span>
-                            <span class="star-badge text-xs">★ 3</span>
+                            <span class="star-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><use href="#i-star"/></svg> 3</span>
                         </div>
                         <p class="mt-2 text-muted leading-relaxed max-w-[75ch]">An emotional state machine for agentic LLM pipelines — mood-weighted tool selection.</p>
                     </div>
@@ -1035,7 +1030,7 @@
                             <span class="font-mono text-sm text-ink">OraclePageIndex</span>
                             <span class="tag">Python</span>
                             <span class="tag">RAG</span>
-                            <span class="star-badge text-xs">★ 2</span>
+                            <span class="star-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><use href="#i-star"/></svg> 2</span>
                         </div>
                         <p class="mt-2 text-muted leading-relaxed max-w-[75ch]">Oracle AI Database-powered document intelligence — SQL property graphs, vectorless RAG, knowledge-graph visualization.</p>
                     </div>
@@ -1049,7 +1044,7 @@
                             <span class="font-mono text-sm text-ink">zerooraclaw</span>
                             <span class="tag">Rust</span>
                             <span class="tag">Oracle AI DB</span>
-                            <span class="star-badge text-xs">★ 1</span>
+                            <span class="star-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><use href="#i-star"/></svg> 1</span>
                         </div>
                         <p class="mt-2 text-muted leading-relaxed max-w-[75ch]">Fast, small, autonomous AI assistant running exclusively on Oracle AI DB and Oracle Free Container.</p>
                     </div>
@@ -1061,7 +1056,7 @@
                             <span class="font-mono text-sm text-ink">orahermes-agent</span>
                             <span class="tag">Python</span>
                             <span class="tag">OCI GenAI</span>
-                            <span class="star-badge text-xs">★ 1</span>
+                            <span class="star-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><use href="#i-star"/></svg> 1</span>
                         </div>
                         <p class="mt-2 text-muted leading-relaxed max-w-[75ch]">Oracle AI Agent Harness — a fork of NousResearch/hermes-agent powered by OCI GenAI and Oracle 26ai Free.</p>
                     </div>
@@ -1073,7 +1068,7 @@
                             <span class="font-mono text-sm text-ink">continual-learning</span>
                             <span class="tag">Python</span>
                             <span class="tag">Research</span>
-                            <span class="star-badge text-xs">★ 1</span>
+                            <span class="star-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><use href="#i-star"/></svg> 1</span>
                         </div>
                         <p class="mt-2 text-muted leading-relaxed max-w-[75ch]">JiT (Just-in-Time) and continual learning strategies for LLMs without catastrophic forgetting.</p>
                     </div>
@@ -1085,7 +1080,7 @@
                             <span class="font-mono text-sm text-ink">waze-osint-tracker</span>
                             <span class="tag">Python</span>
                             <span class="tag">Geo</span>
-                            <span class="star-badge text-xs">★ 1</span>
+                            <span class="star-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><use href="#i-star"/></svg> 1</span>
                         </div>
                         <p class="mt-2 text-muted leading-relaxed max-w-[75ch]">Near-real-time visualization of all world events logged on Waze — OSINT for traffic anomalies.</p>
                     </div>
@@ -1222,7 +1217,7 @@
         <div class="col-span-12 lg:col-span-4">
             <div class="eyebrow mb-4 reveal">§ 04 · Courses</div>
             <h2 class="h-display text-5xl md:text-6xl text-ink reveal d1">
-                Courses &amp; <span class="italic">collaborations</span>.
+                Courses &amp; <span class="text-ember">collaborations</span>.
             </h2>
             <p class="mt-5 text-muted max-w-[45ch] reveal d2">
                 Short courses and workshops with learning platforms, usually on the agent-memory and Oracle AI DB side.
@@ -1238,7 +1233,7 @@
                     <span class="font-mono text-xs text-muted">2026</span>
                 </div>
                 <h3 class="mt-5 h-display text-3xl md:text-4xl text-ink leading-tight">
-                    Agent Memory — <span class="italic">building memory-aware agents</span>
+                    Agent Memory — <span class="text-ember">building memory-aware agents</span>
                 </h3>
                 <p class="mt-4 text-muted leading-relaxed max-w-[60ch]">
                     Co-instructor with <a href="https://github.com/richmondalake" target="_blank" rel="noopener" class="link-in">Richmond Alake</a>, Brendan Brown, and <a href="https://github.com/andrewyng" target="_blank" rel="noopener" class="link-in">Andrew Ng</a>.
@@ -1264,7 +1259,7 @@
             <div class="col-span-12 lg:col-span-5">
                 <div class="eyebrow mb-4 reveal">§ 05 · Speaking</div>
                 <h2 class="h-display text-5xl md:text-6xl text-ink reveal d1">
-                    Talks &amp; <span class="italic">conferences</span>.
+                    Talks &amp; <span class="text-ember">conferences</span>.
                 </h2>
             </div>
             <div class="col-span-12 lg:col-span-6 lg:col-start-7 flex items-end">
@@ -1395,7 +1390,7 @@
             <div class="col-span-12 lg:col-span-5">
                 <div class="eyebrow mb-4 reveal">§ 06 · Writing</div>
                 <h2 class="h-display text-5xl md:text-6xl text-ink reveal d1">
-                    Writing &amp; <span class="italic">appearances</span>.
+                    Writing &amp; <span class="text-ember">appearances</span>.
                 </h2>
             </div>
             <div class="col-span-12 lg:col-span-6 lg:col-start-7 flex items-end">
@@ -1475,15 +1470,15 @@
             <div class="md:col-span-6 grid grid-cols-1 md:grid-cols-6 gap-4 md:gap-5 reveal d2">
                 <figure class="photo-frame relative md:col-span-3 md:row-span-2 aspect-[4/5] md:aspect-auto md:min-h-[440px] rounded-2xl overflow-hidden">
                     <img loading="lazy" alt="Jasper Nacho Martinez — profile portrait" src="https://github.com/jasperan/jasperan/assets/20752424/32a64be8-5649-479e-b120-7a0ac4138f90" class="absolute inset-0 w-full h-full object-cover">
-                    <figcaption class="absolute bottom-3 left-3 right-3 photo-caption text-white mix-blend-difference">Profile · Madrid</figcaption>
+                    <figcaption class="photo-caption absolute bottom-3 left-3">Profile · Madrid</figcaption>
                 </figure>
                 <figure class="photo-frame relative md:col-span-3 aspect-[16/10] rounded-2xl overflow-hidden">
                     <img loading="lazy" alt="With Richmond Alake, Brendan Brown, and Andrew Ng in San Francisco, 2026" src="https://github.com/user-attachments/assets/e102338e-be2a-4d79-bc57-fe17a5484fee" class="absolute inset-0 w-full h-full object-cover">
-                    <figcaption class="absolute bottom-3 left-3 right-3 photo-caption text-white mix-blend-difference">With Richmond Alake, Brendan Brown &amp; Andrew Ng · SF 2026</figcaption>
+                    <figcaption class="photo-caption absolute bottom-3 left-3">With Richmond Alake, Brendan Brown &amp; Andrew Ng · SF 2026</figcaption>
                 </figure>
                 <figure class="photo-frame relative md:col-span-3 aspect-[16/10] rounded-2xl overflow-hidden">
                     <img loading="lazy" alt="Jasper at Oracle CloudWorld 2022" src="https://user-images.githubusercontent.com/20752424/214705966-dd90d511-713b-4322-b620-bd2946857f02.jpg" class="absolute inset-0 w-full h-full object-cover">
-                    <figcaption class="absolute bottom-3 left-3 right-3 photo-caption text-white mix-blend-difference">Oracle CloudWorld · 2022</figcaption>
+                    <figcaption class="photo-caption absolute bottom-3 left-3">Oracle CloudWorld · 2022</figcaption>
                 </figure>
             </div>
         </div>
@@ -1496,7 +1491,7 @@
         <div class="col-span-12 lg:col-span-7">
             <div class="eyebrow mb-6 reveal">§ 07 · Contact</div>
             <h2 class="h-display text-[clamp(3rem,9vw,7rem)] text-ink leading-[0.95] reveal d1">
-                Let's build <span class="italic ember-stroke">something</span>.
+                Let's build <span class="ember-stroke">something</span>.
             </h2>
             <p class="mt-8 text-xl md:text-2xl text-muted leading-relaxed max-w-[58ch] reveal d2">
                 Short consulting engagements, workshop bookings, co-authorship on research, or just
